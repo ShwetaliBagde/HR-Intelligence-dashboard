@@ -1,0 +1,2417 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>icogz | People Intelligence Dashboard</title>
+    <!-- Google Fonts: Ubuntu -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet">
+    <!-- CSS File -->
+    <link rel="stylesheet" href="styles.css?v=1.0.7">
+    <!-- ApexCharts for rich, modern interactive charts -->
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    <!-- Lucide Icons CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/lucide@0.344.0/dist/umd/lucide.min.js"></script>
+</head>
+<body>
+    <div class="app-container">
+        <!-- LEFT SIDEBAR -->
+        <aside class="sidebar">
+    <div class="sidebar-brand">
+        <div class="brand-logo">
+            <img src="logo.png?v=1.0.7" alt="icogz" class="logo-img">
+        </div>
+        <button class="btn-sidebar-toggle" id="sidebar-toggle-btn">
+            <i data-lucide="chevron-left"></i>
+        </button>
+    </div>
+    <nav class="sidebar-nav">
+        <ul class="nav-list">
+            <li class="nav-item active" data-screen="overview">
+                <i data-lucide="layout-dashboard"></i>
+                <span>Overview</span>
+            </li>
+            <li class="nav-item" data-screen="workforce">
+                <i data-lucide="users"></i>
+                <span>Workforce Planning</span>
+            </li>
+            <li class="nav-item" data-screen="attrition">
+                <i data-lucide="trending-down"></i>
+                <span>Attrition Intelligence</span>
+            </li>
+            <li class="nav-item" data-screen="talent">
+                <i data-lucide="user-plus"></i>
+                <span>Talent Acquisition</span>
+            </li>
+            <li class="nav-item" data-screen="learning">
+                <i data-lucide="graduation-cap"></i>
+                <span>Learning & Development</span>
+            </li>
+            <li class="nav-item" data-screen="compensation">
+                <i data-lucide="dollar-sign"></i>
+                <span>Compensation Intelligence</span>
+            </li>
+            <li class="nav-item" data-screen="engagement">
+                <i data-lucide="smile"></i>
+                <span>Engagement Correlation</span>
+            </li>
+            <li class="nav-item" data-screen="operations">
+                <i data-lucide="cog"></i>
+                <span>HR Operations</span>
+            </li>
+            <li class="nav-item" data-screen="projects">
+                <i data-lucide="briefcase"></i>
+                <span>Project Management</span>
+            </li>
+        </ul>
+        <div class="nav-divider">SHORTCUTS</div>
+        <ul class="nav-list shortcuts-list">
+            <li class="nav-item" data-shortcut="alerts">
+                <i data-lucide="bell"></i>
+                <span>Alerts</span>
+                <span class="badge badge-danger">4</span>
+            </li>
+            <li class="nav-item" data-shortcut="reports">
+                <i data-lucide="file-bar-chart"></i>
+                <span>Reports</span>
+            </li>
+            <li class="nav-item" data-shortcut="dictionary">
+                <i data-lucide="book-open"></i>
+                <span>Data Dictionary</span>
+            </li>
+            <li class="nav-item" data-shortcut="settings">
+                <i data-lucide="settings"></i>
+                <span>Settings</span>
+            </li>
+        </ul>
+    </nav>
+    <div class="sidebar-footer">
+        <div class="footer-badge">
+            <i data-lucide="cpu"></i>
+            <div class="badge-texts">
+                <span class="footer-title">Autonomous Intelligence</span>
+                <span class="footer-subtitle">Architecture™</span>
+            </div>
+        </div>
+    </div>
+</aside>
+
+        <!-- MAIN LAYOUT -->
+        <main class="main-layout">
+            <!-- TOP BAR -->
+            <header class="topbar">
+                <div class="topbar-search">
+                    <i data-lucide="search" class="search-icon"></i>
+                    <input type="text" placeholder="Ask anything about your workforce..." id="global-search-input">
+                </div>
+
+                <div class="topbar-actions">
+                    <!-- Date Picker -->
+                    <div class="date-range-selector">
+                        <i data-lucide="calendar"></i>
+                        <div class="date-details">
+                            <span class="date-label">Date Range</span>
+                            <span class="date-value">May 1 – May 31, 2024</span>
+                        </div>
+                        <i data-lucide="chevron-down" class="dropdown-chevron"></i>
+                    </div>
+
+                    <!-- Notification -->
+                    <div class="notification-trigger" id="notif-bell">
+                        <i data-lucide="bell"></i>
+                        <span class="notif-dot">8</span>
+                    </div>
+
+                    <!-- User Profile -->
+                    <div class="user-profile">
+                        <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80&w=100" alt="Anita Sharma" class="user-avatar">
+                        <div class="user-info">
+                            <span class="user-name">Anita Sharma</span>
+                            <span class="user-role">CHRO</span>
+                        </div>
+                        <i data-lucide="chevron-down" class="profile-chevron"></i>
+                    </div>
+                </div>
+            </header>
+
+            <!-- SCREENS CONTAINER -->
+            <div class="content-container">
+                
+                <!-- 1. OVERVIEW SCREEN -->
+                <div class="screen active" id="screen-overview">
+                    <!-- Top AI Insight Banner -->
+                    <div class="ai-insight-banner">
+                        <div class="banner-left">
+
+                            <div class="insight-content">
+                                <div class="insight-header">
+                                    <span class="insight-title">AI Insight</span>
+                                    <span class="insight-badge badge-high-impact">HIGH IMPACT</span>
+                                </div>
+                                <p class="insight-text">
+                                    Attrition risk in <strong>Sales (West Region)</strong> increased by <strong>18%</strong> in the last 30 days, driven by compensation gap and low engagement scores.
+                                </p>
+                                <div class="insight-buttons">
+                                    <button class="btn btn-primary" onclick="switchScreen('attrition')">Explore Insight</button>
+                                    <button class="btn btn-outline" id="take-action-btn">Take Action</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="banner-right">
+                            <div class="score-card">
+                                <span class="score-label">Confidence Score</span>
+                                <span class="score-value">92%</span>
+                                <div class="score-progress-bar">
+                                    <div class="progress" style="width: 92%;"></div>
+                                </div>
+                            </div>
+                            <div class="banner-chart-container">
+                                <div id="banner-sparkline"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Metric Cards Grid (5 Columns) -->
+                    <div class="metrics-grid">
+                        <!-- Card 1: Total Headcount -->
+                        <div class="metric-card" id="card-headcount">
+                            <div class="card-header">
+                                <div class="header-left">
+                                    <div class="card-icon blue"><i data-lucide="users-2"></i></div>
+                                    <span class="card-title">Total Headcount</span>
+                                </div>
+                                <button class="btn-insight-toggle" onclick="toggleCardInsight('card-headcount')">
+                                    <i data-lucide="sparkles"></i>
+                                </button>
+                            </div>
+                            <div class="card-body">
+                                <div class="metric-value-container">
+                                    <span class="metric-value">12,842</span>
+                                    <span class="metric-change up"><i data-lucide="trending-up"></i> 2.4% vs Apr 2024</span>
+                                </div>
+                                <div class="metric-chart">
+                                    <div id="chart-sparkline-headcount"></div>
+                                </div>
+                            </div>
+                            <!-- AI Insight Overlay -->
+                            <div class="insight-overlay">
+                                <div class="overlay-header">
+                                    <span class="overlay-title"><i data-lucide="sparkles"></i> AI Headcount Insight</span>
+                                    <button class="overlay-close" onclick="toggleCardInsight('card-headcount')">&times;</button>
+                                </div>
+                                <div class="overlay-body">
+                                    <p>Headcount increased by 2.4% with key expansion in Product Management (+8%) and R&D (+6.5%).</p>
+                                    <ul>
+                                        <li><strong>Contractor Mix:</strong> Decreased by 3% as temporary roles transitioned to FTEs.</li>
+                                        <li><strong>Span of Control:</strong> Avg. span of control remains steady at 1:6.2.</li>
+                                    </ul>
+                                </div>
+                            <div class="overlay-footer insight-buttons" style="margin-top: 0.75rem; display: flex; gap: 0.5rem; padding-bottom: 0.5rem;">
+                                    <button class="btn btn-outline" style="padding: 0.3rem 0.6rem; font-size: 0.7rem; flex: 1;">Explore Insight</button>
+                                    <button class="btn btn-primary" style="padding: 0.3rem 0.6rem; font-size: 0.7rem; flex: 1;">Take Action</button>
+                                </div>
+                            </div>
+                            
+                        </div>
+
+                        <!-- Card 2: Attrition Rate -->
+                        <div class="metric-card" id="card-attrition">
+                            <div class="card-header">
+                                <div class="header-left">
+                                    <div class="card-icon red"><i data-lucide="user-x"></i></div>
+                                    <span class="card-title">Attrition Rate (MTD)</span>
+                                </div>
+                                <button class="btn-insight-toggle" onclick="toggleCardInsight('card-attrition')">
+                                    <i data-lucide="sparkles"></i>
+                                </button>
+                            </div>
+                            <div class="card-body">
+                                <div class="metric-value-container">
+                                    <span class="metric-value">14.7%</span>
+                                    <span class="metric-change down"><i data-lucide="trending-up"></i> 1.8% vs Apr 2024</span>
+                                </div>
+                                <div class="metric-chart">
+                                    <div id="chart-sparkline-attrition"></div>
+                                </div>
+                            </div>
+                            <!-- AI Insight Overlay -->
+                            <div class="insight-overlay">
+                                <div class="overlay-header">
+                                    <span class="overlay-title"><i data-lucide="sparkles"></i> AI Attrition Insight</span>
+                                    <button class="overlay-close" onclick="toggleCardInsight('card-attrition')">&times;</button>
+                                </div>
+                                <div class="overlay-body">
+                                    <p>Voluntary attrition spike (14.7%) concentrated in Mid-level Sales & Software Engineers with 1-3 yrs tenure.</p>
+                                    <ul>
+                                        <li><strong>Main Driver:</strong> Market compensation gap (average 15.2% below local benchmark).</li>
+                                        <li><strong>Risk Trigger:</strong> 42% of departing employees cited "lack of growth paths".</li>
+                                    </ul>
+                                </div>
+                            <div class="overlay-footer insight-buttons" style="margin-top: 0.75rem; display: flex; gap: 0.5rem; padding-bottom: 0.5rem;">
+                                    <button class="btn btn-outline" style="padding: 0.3rem 0.6rem; font-size: 0.7rem; flex: 1;">Explore Insight</button>
+                                    <button class="btn btn-primary" style="padding: 0.3rem 0.6rem; font-size: 0.7rem; flex: 1;">Take Action</button>
+                                </div>
+                            </div>
+                            
+                        </div>
+
+                        <!-- Card 3: Hiring Velocity -->
+                        <div class="metric-card" id="card-velocity">
+                            <div class="card-header">
+                                <div class="header-left">
+                                    <div class="card-icon blue"><i data-lucide="zap"></i></div>
+                                    <span class="card-title">Hiring Velocity</span>
+                                </div>
+                                <button class="btn-insight-toggle" onclick="toggleCardInsight('card-velocity')">
+                                    <i data-lucide="sparkles"></i>
+                                </button>
+                            </div>
+                            <div class="card-body">
+                                <div class="metric-value-container">
+                                    <span class="metric-value">28.6 days</span>
+                                    <span class="metric-change up-green"><i data-lucide="trending-down"></i> 4.2 days vs Apr 2024</span>
+                                </div>
+                                <div class="metric-chart">
+                                    <div id="chart-sparkline-velocity"></div>
+                                </div>
+                            </div>
+                            <!-- AI Insight Overlay -->
+                            <div class="insight-overlay">
+                                <div class="overlay-header">
+                                    <span class="overlay-title"><i data-lucide="sparkles"></i> AI Velocity Insight</span>
+                                    <button class="overlay-close" onclick="toggleCardInsight('card-velocity')">&times;</button>
+                                </div>
+                                <div class="overlay-body">
+                                    <p>Hiring speed improved to 28.6 days due to automated sourcing filters & structured interview guides.</p>
+                                    <ul>
+                                        <li><strong>Top Performer:</strong> Talent sourcing for Customer Success (avg 18 days).</li>
+                                        <li><strong>Bottleneck:</strong> Technical interviews for Cybersecurity positions (avg 49 days).</li>
+                                    </ul>
+                                </div>
+                            <div class="overlay-footer insight-buttons" style="margin-top: 0.75rem; display: flex; gap: 0.5rem; padding-bottom: 0.5rem;">
+                                    <button class="btn btn-outline" style="padding: 0.3rem 0.6rem; font-size: 0.7rem; flex: 1;">Explore Insight</button>
+                                    <button class="btn btn-primary" style="padding: 0.3rem 0.6rem; font-size: 0.7rem; flex: 1;">Take Action</button>
+                                </div>
+                            </div>
+                            
+                        </div>
+
+                        <!-- Card 4: Engagement Score -->
+                        <div class="metric-card" id="card-engagement">
+                            <div class="card-header">
+                                <div class="header-left">
+                                    <div class="card-icon green"><i data-lucide="smile"></i></div>
+                                    <span class="card-title">Engagement Score</span>
+                                </div>
+                                <button class="btn-insight-toggle" onclick="toggleCardInsight('card-engagement')">
+                                    <i data-lucide="sparkles"></i>
+                                </button>
+                            </div>
+                            <div class="card-body">
+                                <div class="metric-value-container">
+                                    <span class="metric-value">73<span class="metric-value-sub">/100</span></span>
+                                    <span class="metric-change up-green"><i data-lucide="trending-up"></i> 6 pts vs Apr 2024</span>
+                                </div>
+                                <div class="metric-chart">
+                                    <div id="chart-sparkline-engagement"></div>
+                                </div>
+                            </div>
+                            <!-- AI Insight Overlay -->
+                            <div class="insight-overlay">
+                                <div class="overlay-header">
+                                    <span class="overlay-title"><i data-lucide="sparkles"></i> AI Engagement Insight</span>
+                                    <button class="overlay-close" onclick="toggleCardInsight('card-engagement')">&times;</button>
+                                </div>
+                                <div class="overlay-body">
+                                    <p>Overall engagement rose by 6 points to 73, driven by recent wellness programs and flexible remote allowances.</p>
+                                    <ul>
+                                        <li><strong>High Performers:</strong> Marketing team reports highest score (82/100).</li>
+                                        <li><strong>Needs Focus:</strong> Support Operations has declined to 61/100 due to workload.</li>
+                                    </ul>
+                                </div>
+                            <div class="overlay-footer insight-buttons" style="margin-top: 0.75rem; display: flex; gap: 0.5rem; padding-bottom: 0.5rem;">
+                                    <button class="btn btn-outline" style="padding: 0.3rem 0.6rem; font-size: 0.7rem; flex: 1;">Explore Insight</button>
+                                    <button class="btn btn-primary" style="padding: 0.3rem 0.6rem; font-size: 0.7rem; flex: 1;">Take Action</button>
+                                </div>
+                            </div>
+                            
+                        </div>
+
+                        <!-- Card 5: Cost per Hire -->
+                        <div class="metric-card" id="card-costperhire">
+                            <div class="card-header">
+                                <div class="header-left">
+                                    <div class="card-icon orange"><i data-lucide="dollar-sign"></i></div>
+                                    <span class="card-title">Cost per Hire</span>
+                                </div>
+                                <button class="btn-insight-toggle" onclick="toggleCardInsight('card-costperhire')">
+                                    <i data-lucide="sparkles"></i>
+                                </button>
+                            </div>
+                            <div class="card-body">
+                                <div class="metric-value-container">
+                                    <span class="metric-value">$4,152</span>
+                                    <span class="metric-change down-green"><i data-lucide="trending-down"></i> 6.3% vs Apr 2024</span>
+                                </div>
+                                <div class="metric-chart">
+                                    <div id="chart-sparkline-costperhire"></div>
+                                </div>
+                            </div>
+                            <!-- AI Insight Overlay -->
+                            <div class="insight-overlay">
+                                <div class="overlay-header">
+                                    <span class="overlay-title"><i data-lucide="sparkles"></i> AI Cost per Hire Insight</span>
+                                    <button class="overlay-close" onclick="toggleCardInsight('card-costperhire')">&times;</button>
+                                </div>
+                                <div class="overlay-body">
+                                    <p>Cost per hire fell 6.3% to $4,152, supported by increased employee referrals (now 35% of total hires).</p>
+                                    <ul>
+                                        <li><strong>Agency Fees:</strong> Reduced by 12% by using internal talent acquisition specialists.</li>
+                                        <li><strong>High Cost Channels:</strong> Executive search roles remain high at $15,400 per placement.</li>
+                                    </ul>
+                                </div>
+                            <div class="overlay-footer insight-buttons" style="margin-top: 0.75rem; display: flex; gap: 0.5rem; padding-bottom: 0.5rem;">
+                                    <button class="btn btn-outline" style="padding: 0.3rem 0.6rem; font-size: 0.7rem; flex: 1;">Explore Insight</button>
+                                    <button class="btn btn-primary" style="padding: 0.3rem 0.6rem; font-size: 0.7rem; flex: 1;">Take Action</button>
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+
+                    <!-- Middle Row: 2 Column Intelligence Cards -->
+                    <div class="intelligence-grid">
+                        <!-- Column 1: Predictive Attrition Intelligence -->
+                        <div class="intel-card" id="intel-predictive-attrition">
+                            <div class="intel-card-header">
+                                <div class="intel-card-title-container">
+                                    <span class="intel-title">Predictive Attrition Intelligence</span>
+                                    <span class="tooltip-trigger" data-tooltip="AI-predicted attrition models based on performance, compensation and survey engagement.">
+                                        <i data-lucide="info"></i>
+                                    </span>
+                                </div>
+                                <button class="btn-insight-toggle" onclick="toggleCardInsight('intel-predictive-attrition')">
+                                    <i data-lucide="sparkles" style="width: 18px; height: 18px;"></i> AI Insights
+                                </button>
+                            </div>
+                            <div class="intel-card-content flex-col">
+                                <div class="top-attrition-panel">
+                                    <!-- Department Heat Grid -->
+                                    <div class="heatmap-panel">
+                                        <span class="panel-subtitle">Risk of attrition by department</span>
+                                        <div class="heatmap-container">
+                                            <div class="heatmap-row">
+                                                <span class="heatmap-label">Sales</span>
+                                                <div class="heatmap-cells">
+                                                    <div class="cell bg-green"></div>
+                                                    <div class="cell bg-yellow"></div>
+                                                    <div class="cell bg-red active"></div>
+                                                </div>
+                                            </div>
+                                            <div class="heatmap-row">
+                                                <span class="heatmap-label">Engineering</span>
+                                                <div class="heatmap-cells">
+                                                    <div class="cell bg-green"></div>
+                                                    <div class="cell bg-yellow active"></div>
+                                                    <div class="cell bg-red"></div>
+                                                </div>
+                                            </div>
+                                            <div class="heatmap-row">
+                                                <span class="heatmap-label">Customer Success</span>
+                                                <div class="heatmap-cells">
+                                                    <div class="cell bg-green"></div>
+                                                    <div class="cell bg-yellow active"></div>
+                                                    <div class="cell bg-red"></div>
+                                                </div>
+                                            </div>
+                                            <div class="heatmap-row">
+                                                <span class="heatmap-label">Marketing</span>
+                                                <div class="heatmap-cells">
+                                                    <div class="cell bg-green active"></div>
+                                                    <div class="cell bg-yellow"></div>
+                                                    <div class="cell bg-red"></div>
+                                                </div>
+                                            </div>
+                                            <div class="heatmap-row">
+                                                <span class="heatmap-label">Finance</span>
+                                                <div class="heatmap-cells">
+                                                    <div class="cell bg-green active"></div>
+                                                    <div class="cell bg-yellow"></div>
+                                                    <div class="cell bg-red"></div>
+                                                </div>
+                                            </div>
+                                            <div class="heatmap-row">
+                                                <span class="heatmap-label">HR</span>
+                                                <div class="heatmap-cells">
+                                                    <div class="cell bg-green active"></div>
+                                                    <div class="cell bg-yellow"></div>
+                                                    <div class="cell bg-red"></div>
+                                                </div>
+                                            </div>
+                                            <div class="heatmap-row">
+                                                <span class="heatmap-label">Operations</span>
+                                                <div class="heatmap-cells">
+                                                    <div class="cell bg-green active"></div>
+                                                    <div class="cell bg-yellow"></div>
+                                                    <div class="cell bg-red"></div>
+                                                </div>
+                                            </div>
+                                            <div class="heatmap-legend">
+                                                <span>Low</span>
+                                                <span>Medium</span>
+                                                <span>High</span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Overall Risk Distribution Donut Chart -->
+                                    <div class="donut-panel">
+                                        <span class="panel-subtitle text-center">Overall Risk Distribution</span>
+                                        <div class="donut-chart-container">
+                                            <div id="chart-attrition-risk"></div>
+                                            <div class="donut-center-label">
+                                                <span class="center-num">12,842</span>
+                                                <span class="center-txt">Employees</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="bottom-attrition-panel">
+                                    <div class="drivers-panel">
+                                        <span class="panel-subtitle">Top 5 Drivers Contributing to Attrition</span>
+                                        <div class="drivers-list">
+                                            <div class="driver-item">
+                                                <span class="driver-name">Compensation Gap</span>
+                                                <div class="driver-progress">
+                                                    <div class="progress-bar bg-red" style="width: 42%;"></div>
+                                                </div>
+                                                <span class="driver-pct">42%</span>
+                                            </div>
+                                            <div class="driver-item">
+                                                <span class="driver-name">Manager Effectiveness</span>
+                                                <div class="driver-progress">
+                                                    <div class="progress-bar bg-orange" style="width: 28%;"></div>
+                                                </div>
+                                                <span class="driver-pct">28%</span>
+                                            </div>
+                                            <div class="driver-item">
+                                                <span class="driver-name">Engagement Score</span>
+                                                <div class="driver-progress">
+                                                    <div class="progress-bar bg-yellow" style="width: 18%;"></div>
+                                                </div>
+                                                <span class="driver-pct">18%</span>
+                                            </div>
+                                            <div class="driver-item">
+                                                <span class="driver-name">Career Growth</span>
+                                                <div class="driver-progress">
+                                                    <div class="progress-bar bg-blue" style="width: 7%;"></div>
+                                                </div>
+                                                <span class="driver-pct">7%</span>
+                                            </div>
+                                            <div class="driver-item">
+                                                <span class="driver-name">Work Life Balance</span>
+                                                <div class="driver-progress">
+                                                    <div class="progress-bar bg-green" style="width: 5%;"></div>
+                                                </div>
+                                                <span class="driver-pct">5%</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <button class="intel-card-action-btn" onclick="switchScreen('attrition')">
+                                    View Attrition Intelligence <i data-lucide="chevron-right"></i>
+                                </button>
+                            </div>
+
+                            <!-- AI Insight Overlay -->
+                            <div class="insight-overlay">
+                                <div class="overlay-header">
+                                    <span class="overlay-title"><i data-lucide="sparkles"></i> AI Attrition Predictions</span>
+                                    <button class="overlay-close" onclick="toggleCardInsight('intel-predictive-attrition')">&times;</button>
+                                </div>
+                                <div class="overlay-body">
+                                    <div class="alert alert-danger">
+                                        <strong>Critical Flight Risk:</strong> Mid-level Sales Engineers in the West Region have an average attrition risk index of 84%.
+                                    </div>
+                                    <p><strong>Recommendation Plan:</strong></p>
+                                    <ul>
+                                        <li>Initiate an out-of-cycle compensation review for the top 15% high-performing Sales representatives.</li>
+                                        <li>Roll out "Manager Effectiveness Training" specifically in Sales & Product engineering divisions.</li>
+                                        <li>Automate stay interviews for employees in the high-risk orange and red bands.</li>
+                                    </ul>
+                                </div>
+                            <div class="overlay-footer insight-buttons" style="margin-top: 0.75rem; display: flex; gap: 0.5rem; padding-bottom: 0.5rem;">
+                                    <button class="btn btn-outline" style="padding: 0.3rem 0.6rem; font-size: 0.7rem; flex: 1;">Explore Insight</button>
+                                    <button class="btn btn-primary" style="padding: 0.3rem 0.6rem; font-size: 0.7rem; flex: 1;">Take Action</button>
+                                </div>
+                            </div>
+                            
+                        </div>
+
+                        <!-- Column 2: Workforce Planning Intelligence -->
+                        <div class="intel-card" id="intel-workforce-planning">
+                            <div class="intel-card-header">
+                                <div class="intel-card-title-container">
+                                    <span class="intel-title">Workforce Planning Intelligence</span>
+                                    <span class="tooltip-trigger" data-tooltip="12-month demand vs supply forecasting based on historical growth and hiring pipeline.">
+                                        <i data-lucide="info"></i>
+                                    </span>
+                                </div>
+                                <button class="btn-insight-toggle" onclick="toggleCardInsight('intel-workforce-planning')">
+                                    <i data-lucide="sparkles" style="width: 18px; height: 18px;"></i> AI Insights
+                                </button>
+                            </div>
+                            <div class="intel-card-content flex-row">
+                                <!-- Demand vs Supply Chart -->
+                                <div class="workforce-chart-panel">
+                                    <span class="panel-subtitle">Demand vs Supply (Next 12 Months)</span>
+                                    <div class="demand-chart-container">
+                                        <div id="chart-demand-supply"></div>
+                                        <div class="projected-gap-badge">
+                                            <span class="gap-title">Projected Gap</span>
+                                            <span class="gap-value">1,842 roles</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Top Skill Gaps list -->
+                                <div class="skill-gaps-panel">
+                                    <span class="panel-subtitle">Top Skill Gaps</span>
+                                    <div class="skill-gaps-list">
+                                        <div class="skill-gap-item">
+                                            <div class="skill-header">
+                                                <span class="skill-name">Data Engineering</span>
+                                                <span class="gap-score">92</span>
+                                            </div>
+                                            <div class="skill-progress">
+                                                <div class="progress-bar bg-red" style="width: 92%;"></div>
+                                            </div>
+                                        </div>
+                                        <div class="skill-gap-item">
+                                            <div class="skill-header">
+                                                <span class="skill-name">Cloud Architecture</span>
+                                                <span class="gap-score">86</span>
+                                            </div>
+                                            <div class="skill-progress">
+                                                <div class="progress-bar bg-orange" style="width: 86%;"></div>
+                                            </div>
+                                        </div>
+                                        <div class="skill-gap-item">
+                                            <div class="skill-header">
+                                                <span class="skill-name">Cybersecurity</span>
+                                                <span class="gap-score">72</span>
+                                            </div>
+                                            <div class="skill-progress">
+                                                <div class="progress-bar bg-yellow" style="width: 72%;"></div>
+                                            </div>
+                                        </div>
+                                        <div class="skill-gap-item">
+                                            <div class="skill-header">
+                                                <span class="skill-name">Product Management</span>
+                                                <span class="gap-score">58</span>
+                                            </div>
+                                            <div class="skill-progress">
+                                                <div class="progress-bar bg-blue" style="width: 58%;"></div>
+                                            </div>
+                                        </div>
+                                        <div class="skill-gap-item">
+                                            <div class="skill-header">
+                                                <span class="skill-name">AI / ML</span>
+                                                <span class="gap-score">48</span>
+                                            </div>
+                                            <div class="skill-progress">
+                                                <div class="progress-bar bg-green" style="width: 48%;"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="intel-card-footer">
+                                <button class="intel-card-action-btn" onclick="switchScreen('workforce')">
+                                    View Workforce Plan <i data-lucide="chevron-right"></i>
+                                </button>
+                            </div>
+
+                            <!-- AI Insight Overlay -->
+                            <div class="insight-overlay">
+                                <div class="overlay-header">
+                                    <span class="overlay-title"><i data-lucide="sparkles"></i> AI Workforce Insights</span>
+                                    <button class="overlay-close" onclick="toggleCardInsight('intel-workforce-planning')">&times;</button>
+                                </div>
+                                <div class="overlay-body">
+                                    <p>The projected gap of 1,842 roles will peak in Q3 (primarily in engineering and AI roles).</p>
+                                    <ul>
+                                        <li><strong>Skill Deficit Alert:</strong> Data Engineering demand is growing at 3.5x our current hiring velocity.</li>
+                                        <li><strong>Upskilling Opportunity:</strong> High feasibility to convert 22% of internal software developers into Data Engineers within 6 months.</li>
+                                        <li><strong>Recommendation:</strong> Shift 15% of the recruitment budget to upskilling initiatives.</li>
+                                    </ul>
+                                </div>
+                            <div class="overlay-footer insight-buttons" style="margin-top: 0.75rem; display: flex; gap: 0.5rem; padding-bottom: 0.5rem;">
+                                    <button class="btn btn-outline" style="padding: 0.3rem 0.6rem; font-size: 0.7rem; flex: 1;">Explore Insight</button>
+                                    <button class="btn btn-primary" style="padding: 0.3rem 0.6rem; font-size: 0.7rem; flex: 1;">Take Action</button>
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+
+
+        <!-- 9. PROJECT MANAGEMENT SCREEN -->
+        <div class="screen hidden" id="screen-projects">
+            <div class="screen-header">
+                <h2>Project Management</h2>
+                <div class="ai-insight-banner">
+                    <div class="banner-left">
+                        <div class="insight-content">
+                            <div class="insight-header">
+                                <span class="insight-title">AI Insight</span>
+                                <span class="insight-badge badge-high-impact">HIGH IMPACT</span>
+                            </div>
+                            <p class="insight-text">
+                                Project resource allocation risk increased by <strong>15%</strong> due to upcoming demand spikes in Q3. Consider reallocating bench resources.
+                            </p>
+                            <div class="insight-buttons">
+                                <button class="btn btn-primary" onclick="toggleAIProjectPanel()">Explore Insight</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="banner-right">
+                        <div class="score-card">
+                            <span class="score-label">Projected Risk</span>
+                            <span class="score-value">78%</span>
+                        </div>
+                    </div>
+                </div>
+                <button class="btn btn-outline" id="toggle-ai-projects">AI Insights</button>
+            </div>
+            <div class="metrics-grid">
+                <div class="metric-card" id="card-total-projects">
+                    <div class="card-header">
+                        <div class="header-left">
+                            <div class="card-icon blue"><i data-lucide="briefcase"></i></div>
+                            <span class="card-title">Total Projects</span>
+                        </div>
+                    </div>
+                    <div class="card-body"><div class="metric-value-container"><span class="metric-value" id="total-projects-value">124</span></div></div>
+                    <div id="chart-sparkline-projects-total" class="sparkline"></div>
+                </div>
+                <div class="metric-card" id="card-active-projects">
+                    <div class="card-header">
+                        <div class="header-left">
+                            <div class="card-icon green"><i data-lucide="play"></i></div>
+                            <span class="card-title">Active</span>
+                        </div>
+                    </div>
+                    <div class="card-body"><div class="metric-value-container"><span class="metric-value" id="active-projects-value">78</span></div></div>
+                    <div id="chart-sparkline-projects-active" class="sparkline"></div>
+                </div>
+                <div class="metric-card" id="card-completed-projects">
+                    <div class="card-header">
+                        <div class="header-left">
+                            <div class="card-icon purple"><i data-lucide="check-circle"></i></div>
+                            <span class="card-title">Completed</span>
+                        </div>
+                    </div>
+                    <div class="card-body"><div class="metric-value-container"><span class="metric-value" id="completed-projects-value">36</span></div></div>
+                </div>
+                <div class="metric-card" id="card-overdue-projects">
+                    <div class="card-header">
+                        <div class="header-left">
+                            <div class="card-icon red"><i data-lucide="alert-octagon"></i></div>
+                            <span class="card-title">Overdue</span>
+                        </div>
+                    </div>
+                    <div class="card-body"><div class="metric-value-container"><span class="metric-value" id="overdue-projects-value">10</span></div></div>
+                </div>
+            </div>
+            <div class="charts-grid">
+                <div id="chart-projects-utilization" class="chart-container"></div>
+                <div id="chart-projects-resource" class="chart-container"></div>
+            </div>
+            <div class="insight-overlay" id="ai-panel-projects">
+                <div class="overlay-header"><span class="overlay-title"><i data-lucide="sparkles"></i> AI Project Insights</span><button class="overlay-close" onclick="toggleAIProjectPanel()">&times;</button></div>
+                <div class="overlay-body"><div id="ai-projects-messages" class="chat-messages"></div><input type="text" id="ai-projects-input" placeholder="Ask about projects..." class="chat-input"/></div>
+            </div>
+        </div>
+                         <!-- Bottom Row: 5 Small Intelligence Cards -->
+                    <div class="bottom-widgets-grid">
+                        <!-- TA Card -->
+                        <div class="widget-card" id="widget-ta">
+                            <div class="widget-header">
+                                <div class="widget-icon-title">
+                                    <span class="widget-title">Talent Acquisition</span>
+                                </div>
+                                <button class="btn-insight-toggle" onclick="toggleCardInsight('widget-ta')">
+                                    <i data-lucide="sparkles"></i>
+                                </button>
+                            </div>
+                            <div class="widget-body">
+                                <span class="widget-subtitle">Offer to Join Conversion Rate</span>
+                                <div class="widget-main-value">21.3% <span class="metric-change up-green"><i data-lucide="arrow-up-right"></i> 3.6%</span></div>
+                                
+                                <!-- Funnel Chart -->
+                                <div class="funnel-container">
+                                    <div class="funnel-level level-applied" style="width: 100%;">
+                                        <span class="funnel-lbl">Applied</span><span class="funnel-val">18,642</span>
+                                    </div>
+                                    <div class="funnel-level level-screened" style="width: 65%;">
+                                        <span class="funnel-lbl">Screened</span><span class="funnel-val">6,842</span>
+                                    </div>
+                                    <div class="funnel-level level-offered" style="width: 40%;">
+                                        <span class="funnel-lbl">Offered</span><span class="funnel-val">2,846</span>
+                                    </div>
+                                    <div class="funnel-level level-joined" style="width: 25%;">
+                                        <span class="funnel-lbl">Joined</span><span class="funnel-val">1,213</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="widget-footer">
+                                <button class="widget-link-btn" onclick="switchScreen('talent')">View TA Analytics <i data-lucide="chevron-right"></i></button>
+                            </div>
+
+                            <!-- AI Insight Overlay -->
+                            <div class="insight-overlay">
+                                <div class="overlay-header">
+                                    <span class="overlay-title"><i data-lucide="sparkles"></i> AI TA Insight</span>
+                                    <button class="overlay-close" onclick="toggleCardInsight('widget-ta')">&times;</button>
+                                </div>
+                                <div class="overlay-body">
+                                    <p>Offer conversion rate improved to 21.3% (+3.6% vs Apr). Sourcing quality in India region rose by 14%.</p>
+                                    <ul>
+                                        <li><strong>Drop-off Point:</strong> Screened-to-Offered stage shows highest candidate drop-out rate (42%).</li>
+                                    </ul>
+                                </div>
+                            <div class="overlay-footer insight-buttons" style="margin-top: 0.75rem; display: flex; gap: 0.5rem; padding-bottom: 0.5rem;">
+                                    <button class="btn btn-outline" style="padding: 0.3rem 0.6rem; font-size: 0.7rem; flex: 1;">Explore Insight</button>
+                                    <button class="btn btn-primary" style="padding: 0.3rem 0.6rem; font-size: 0.7rem; flex: 1;">Take Action</button>
+                                </div>
+                            </div>
+                            
+                        </div>
+
+                        <!-- L&D Card -->
+                        <div class="widget-card" id="widget-ld">
+                            <div class="widget-header">
+                                <div class="widget-icon-title">
+                                    <span class="widget-title">Learning & Development ROI</span>
+                                </div>
+                                <button class="btn-insight-toggle" onclick="toggleCardInsight('widget-ld')">
+                                    <i data-lucide="sparkles"></i>
+                                </button>
+                            </div>
+                            <div class="widget-body">
+                                <span class="widget-subtitle">Training Impact on Performance</span>
+                                <div class="widget-main-value text-green">+22%</div>
+                                
+                                <span class="widget-section-title">High Impact Programs</span>
+                                <div class="impact-programs-list">
+                                    <div class="program-row">
+                                        <span>Data Analytics</span>
+                                        <span class="text-green">+28%</span>
+                                    </div>
+                                    <div class="program-row">
+                                        <span>Leadership</span>
+                                        <span class="text-green">+24%</span>
+                                    </div>
+                                    <div class="program-row">
+                                        <span>Cloud Fundamentals</span>
+                                        <span class="text-green">+18%</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="widget-footer">
+                                <button class="widget-link-btn" onclick="switchScreen('learning')">View L&D Analytics <i data-lucide="chevron-right"></i></button>
+                            </div>
+
+                            <!-- AI Insight Overlay -->
+                            <div class="insight-overlay">
+                                <div class="overlay-header">
+                                    <span class="overlay-title"><i data-lucide="sparkles"></i> AI L&D Insight</span>
+                                    <button class="overlay-close" onclick="toggleCardInsight('widget-ld')">&times;</button>
+                                </div>
+                                <div class="overlay-body">
+                                    <p>Employees completing Data Analytics training show 28% higher performance appraisal ratings within 6 months.</p>
+                                    <ul>
+                                        <li><strong>ROI Multiplier:</strong> Every $1 spent on upskilling returns $2.14 in retention savings.</li>
+                                    </ul>
+                                </div>
+                            <div class="overlay-footer insight-buttons" style="margin-top: 0.75rem; display: flex; gap: 0.5rem; padding-bottom: 0.5rem;">
+                                    <button class="btn btn-outline" style="padding: 0.3rem 0.6rem; font-size: 0.7rem; flex: 1;">Explore Insight</button>
+                                    <button class="btn btn-primary" style="padding: 0.3rem 0.6rem; font-size: 0.7rem; flex: 1;">Take Action</button>
+                                </div>
+                            </div>
+                            
+                        </div>
+
+                        <!-- Compensation Card -->
+                        <div class="widget-card" id="widget-comp">
+                            <div class="widget-header">
+                                <div class="widget-icon-title">
+                                    <span class="widget-title">Compensation Intelligence</span>
+                                </div>
+                                <button class="btn-insight-toggle" onclick="toggleCardInsight('widget-comp')">
+                                    <i data-lucide="sparkles"></i>
+                                </button>
+                            </div>
+                            <div class="widget-body">
+                                <span class="widget-subtitle">Market Position (Overall)</span>
+                                <div class="widget-main-value">92% <span class="sub-label">vs Market Median</span></div>
+                                
+                                <span class="widget-section-title">Pay Equity Index</span>
+                                <div class="pay-equity-slider">
+                                    <div class="slider-val">0.98</div>
+                                    <div class="slider-track">
+                                        <div class="slider-fill" style="width: 50%;"></div>
+                                        <div class="slider-thumb" style="left: 49%;"></div>
+                                    </div>
+                                    <div class="slider-labels">
+                                        <span>0.0</span>
+                                        <span>1.0</span>
+                                        <span>2.0</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="widget-footer">
+                                <button class="widget-link-btn" onclick="switchScreen('compensation')">View Compensation <i data-lucide="chevron-right"></i></button>
+                            </div>
+
+                            <!-- AI Insight Overlay -->
+                            <div class="insight-overlay">
+                                <div class="overlay-header">
+                                    <span class="overlay-title"><i data-lucide="sparkles"></i> AI Comp Insight</span>
+                                    <button class="overlay-close" onclick="toggleCardInsight('widget-comp')">&times;</button>
+                                </div>
+                                <div class="overlay-body">
+                                    <p>Pay equity index stands at 0.98 (close to parity 1.0). Minor deviations observed in Senior Sales roles.</p>
+                                    <ul>
+                                        <li><strong>Action Item:</strong> Allocate $120k for equity adjustments in Tech Lead roles.</li>
+                                    </ul>
+                                </div>
+                            <div class="overlay-footer insight-buttons" style="margin-top: 0.75rem; display: flex; gap: 0.5rem; padding-bottom: 0.5rem;">
+                                    <button class="btn btn-outline" style="padding: 0.3rem 0.6rem; font-size: 0.7rem; flex: 1;">Explore Insight</button>
+                                    <button class="btn btn-primary" style="padding: 0.3rem 0.6rem; font-size: 0.7rem; flex: 1;">Take Action</button>
+                                </div>
+                            </div>
+                            
+                        </div>
+
+                        <!-- Engagement Correlation Card -->
+                        <div class="widget-card" id="widget-engagement">
+                            <div class="widget-header">
+                                <div class="widget-icon-title">
+                                    <span class="widget-title">Engagement Correlation</span>
+                                </div>
+                                <button class="btn-insight-toggle" onclick="toggleCardInsight('widget-engagement')">
+                                    <i data-lucide="sparkles"></i>
+                                </button>
+                            </div>
+                            <div class="widget-body">
+                                <span class="widget-subtitle">Engagement vs Retention Correlation</span>
+                                <div class="widget-main-value text-blue">0.78 <span class="sub-label strong-pos">Strong Positive</span></div>
+                                
+                                <div class="scatter-container">
+                                    <div id="chart-engagement-scatter" style="height: 100px;"></div>
+                                </div>
+                            </div>
+                            <div class="widget-footer">
+                                <button class="widget-link-btn" onclick="switchScreen('engagement')">View Correlation Engine <i data-lucide="chevron-right"></i></button>
+                            </div>
+
+                            <!-- AI Insight Overlay -->
+                            <div class="insight-overlay">
+                                <div class="overlay-header">
+                                    <span class="overlay-title"><i data-lucide="sparkles"></i> AI Correlation Insight</span>
+                                    <button class="overlay-close" onclick="toggleCardInsight('widget-engagement')">&times;</button>
+                                </div>
+                                <div class="overlay-body">
+                                    <p>A score of 0.78 indicates critical correlation. Drop in engagement precedes voluntary exit by avg 84 days.</p>
+                                    <ul>
+                                        <li><strong>Key Flag:</strong> Teams under managers with <60% feedback rating have 2x attrition.</li>
+                                    </ul>
+                                </div>
+                            <div class="overlay-footer insight-buttons" style="margin-top: 0.75rem; display: flex; gap: 0.5rem; padding-bottom: 0.5rem;">
+                                    <button class="btn btn-outline" style="padding: 0.3rem 0.6rem; font-size: 0.7rem; flex: 1;">Explore Insight</button>
+                                    <button class="btn btn-primary" style="padding: 0.3rem 0.6rem; font-size: 0.7rem; flex: 1;">Take Action</button>
+                                </div>
+                            </div>
+                            
+                        </div>
+
+                        <!-- HR Operations Card -->
+                        <div class="widget-card" id="widget-ops">
+                            <div class="widget-header">
+                                <div class="widget-icon-title">
+                                    <span class="widget-title">HR Operations Efficiency</span>
+                                </div>
+                                <button class="btn-insight-toggle" onclick="toggleCardInsight('widget-ops')">
+                                    <i data-lucide="sparkles"></i>
+                                </button>
+                            </div>
+                            <div class="widget-body">
+                                <span class="widget-subtitle">Overall SLA Achievement</span>
+                                <div class="widget-main-value">92%</div>
+                                
+                                <span class="widget-section-title">Process Performance</span>
+                                <div class="process-performance-list">
+                                    <div class="process-row">
+                                        <span>Hire to Onboard</span>
+                                        <span class="text-green font-bold">93%</span>
+                                    </div>
+                                    <div class="process-row">
+                                        <span>Leave Management</span>
+                                        <span class="text-green font-bold">90%</span>
+                                    </div>
+                                    <div class="process-row">
+                                        <span>Query Resolution</span>
+                                        <span class="text-green font-bold">94%</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="widget-footer">
+                                <button class="widget-link-btn" onclick="switchScreen('operations')">View HR Ops Dashboard <i data-lucide="chevron-right"></i></button>
+                            </div>
+
+                            <!-- AI Insight Overlay -->
+                            <div class="insight-overlay">
+                                <div class="overlay-header">
+                                    <span class="overlay-title"><i data-lucide="sparkles"></i> AI Ops Insight</span>
+                                    <button class="overlay-close" onclick="toggleCardInsight('widget-ops')">&times;</button>
+                                </div>
+                                <div class="overlay-body">
+                                    <p>Onboarding SLAs are at 93%. Main delay resides in Background Verifications (average 8 days delay).</p>
+                                    <ul>
+                                        <li><strong>Proposal:</strong> Transition to instant digital verification platforms.</li>
+                                    </ul>
+                                </div>
+                            <div class="overlay-footer insight-buttons" style="margin-top: 0.75rem; display: flex; gap: 0.5rem; padding-bottom: 0.5rem;">
+                                    <button class="btn btn-outline" style="padding: 0.3rem 0.6rem; font-size: 0.7rem; flex: 1;">Explore Insight</button>
+                                    <button class="btn btn-primary" style="padding: 0.3rem 0.6rem; font-size: 0.7rem; flex: 1;">Take Action</button>
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 2. WORKFORCE PLANNING SCREEN -->
+                <div class="screen" id="screen-workforce">
+                    <div class="screen-header">
+                        <div class="screen-title-desc">
+                            <h2>Workforce Planning Intelligence</h2>
+                            <p>Forecast hiring needs, analyze skill deficits, and manage organizational resource distribution.</p>
+                        </div>
+                        <button class="btn btn-primary" onclick="simulateUpskilling()"><i data-lucide="sparkles"></i> Run Upskilling Scenario Planner</button>
+                    </div>
+
+                    <!-- Workforce Planning Grid -->
+                    <div class="inner-screen-grid">
+                        <div class="full-card" id="card-wf-forecast">
+                            <div class="card-header">
+                                <span class="card-title">12-Month Demand vs Supply Scenario Forecast</span>
+                                <button class="btn-insight-toggle" onclick="toggleCardInsight('card-wf-forecast')"><i data-lucide="sparkles"></i></button>
+                            </div>
+                            <div class="card-body">
+                                <div class="chart-holder-large">
+                                    <div id="chart-wf-forecast-large"></div>
+                                </div>
+                            </div>
+                            <div class="insight-overlay">
+                                <div class="overlay-header">
+                                    <span class="overlay-title"><i data-lucide="sparkles"></i> AI Workforce Forecast Insights</span>
+                                    <button class="overlay-close" onclick="toggleCardInsight('card-wf-forecast')">&times;</button>
+                                </div>
+                                <div class="overlay-body">
+                                    <p>A hiring deficit is projected to emerge starting August 2024, expanding to 1,842 roles by May 2025.</p>
+                                    <ul>
+                                        <li><strong>Contributing Factors:</strong> Accelerated expansion in Cloud & AI projects (+34% YoY) and current recruitment bottleneck in specialized engineering roles.</li>
+                                        <li><strong>Action Plan:</strong> Standardize hiring pipelines, increase referral rewards, and establish offshore centers to bridge the gap.</li>
+                                    </ul>
+                                </div>
+                            <div class="overlay-footer insight-buttons" style="margin-top: 0.75rem; display: flex; gap: 0.5rem; padding-bottom: 0.5rem;">
+                                    <button class="btn btn-outline" style="padding: 0.3rem 0.6rem; font-size: 0.7rem; flex: 1;">Explore Insight</button>
+                                    <button class="btn btn-primary" style="padding: 0.3rem 0.6rem; font-size: 0.7rem; flex: 1;">Take Action</button>
+                                </div>
+                            </div>
+                            
+                        </div>
+
+                        <div class="two-column-layout">
+                            <!-- Skill Gap Map -->
+                            <div class="half-card" id="card-wf-skills">
+                                <div class="card-header">
+                                    <span class="card-title">Detailed Organizational Skill Gap Matrix</span>
+                                    <button class="btn-insight-toggle" onclick="toggleCardInsight('card-wf-skills')"><i data-lucide="sparkles"></i></button>
+                                </div>
+                                <div class="card-body">
+                                    <div class="skill-gap-interactive-table">
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <th>Skill Domain</th>
+                                                    <th>Required FTEs</th>
+                                                    <th>Available FTEs</th>
+                                                    <th>Deficit Score</th>
+                                                    <th>Risk Status</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>Data Engineering</td>
+                                                    <td>340</td>
+                                                    <td>220</td>
+                                                    <td class="font-bold text-red">92</td>
+                                                    <td><span class="badge badge-danger">Critical</span></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Cloud Architecture</td>
+                                                    <td>180</td>
+                                                    <td>115</td>
+                                                    <td class="font-bold text-red">86</td>
+                                                    <td><span class="badge badge-danger">Critical</span></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Cybersecurity</td>
+                                                    <td>140</td>
+                                                    <td>95</td>
+                                                    <td class="font-bold text-orange">72</td>
+                                                    <td><span class="badge badge-warning">High</span></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Product Management</td>
+                                                    <td>210</td>
+                                                    <td>175</td>
+                                                    <td class="font-bold text-yellow">58</td>
+                                                    <td><span class="badge badge-warning">Medium</span></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>AI / Machine Learning</td>
+                                                    <td>290</td>
+                                                    <td>260</td>
+                                                    <td class="font-bold text-green">48</td>
+                                                    <td><span class="badge badge-success">Manageable</span></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="insight-overlay">
+                                    <div class="overlay-header">
+                                        <span class="overlay-title"><i data-lucide="sparkles"></i> AI Skill Deficit Analysis</span>
+                                        <button class="overlay-close" onclick="toggleCardInsight('card-wf-skills')">&times;</button>
+                                    </div>
+                                    <div class="overlay-body">
+                                        <p>Data Engineering and Cloud Architecture represent 70% of organizational project blockers.</p>
+                                        <ul>
+                                            <li><strong>Upskilling Recommendation:</strong> Identify developers with strong Python/SQL backgrounds and run a 12-week internal bootcamp. Projected cost: $4,500/FTE vs $18,000/FTE external recruitment.</li>
+                                        </ul>
+                                    </div>
+                                <div class="overlay-footer insight-buttons" style="margin-top: 0.75rem; display: flex; gap: 0.5rem; padding-bottom: 0.5rem;">
+                                    <button class="btn btn-outline" style="padding: 0.3rem 0.6rem; font-size: 0.7rem; flex: 1;">Explore Insight</button>
+                                    <button class="btn btn-primary" style="padding: 0.3rem 0.6rem; font-size: 0.7rem; flex: 1;">Take Action</button>
+                                </div>
+                            </div>
+                            
+                            </div>
+
+                            <!-- Org Distribution -->
+                            <div class="half-card" id="card-wf-dist">
+                                <div class="card-header">
+                                    <span class="card-title">Succession Planning & Retirement Risk</span>
+                                    <button class="btn-insight-toggle" onclick="toggleCardInsight('card-wf-dist')"><i data-lucide="sparkles"></i></button>
+                                </div>
+                                <div class="card-body">
+                                    <div class="chart-holder">
+                                        <div id="chart-succession-planning"></div>
+                                    </div>
+                                </div>
+                                <div class="insight-overlay">
+                                    <div class="overlay-header">
+                                        <span class="overlay-title"><i data-lucide="sparkles"></i> AI Succession Analysis</span>
+                                        <button class="overlay-close" onclick="toggleCardInsight('card-wf-dist')">&times;</button>
+                                    </div>
+                                    <div class="overlay-body">
+                                        <p>15% of critical leadership roles are at risk of retirement or exit in the next 18 months, with no identified internal successor.</p>
+                                        <ul>
+                                            <li><strong>Critical Departments:</strong> Finance and Supply Operations are at highest risk.</li>
+                                            <li><strong>Urgent Action:</strong> Implement a mentorship fast-track program for VP/Director-ready Senior Managers.</li>
+                                        </ul>
+                                    </div>
+                                <div class="overlay-footer insight-buttons" style="margin-top: 0.75rem; display: flex; gap: 0.5rem; padding-bottom: 0.5rem;">
+                                    <button class="btn btn-outline" style="padding: 0.3rem 0.6rem; font-size: 0.7rem; flex: 1;">Explore Insight</button>
+                                    <button class="btn btn-primary" style="padding: 0.3rem 0.6rem; font-size: 0.7rem; flex: 1;">Take Action</button>
+                                </div>
+                            </div>
+                            
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 3. ATTRITION INTELLIGENCE SCREEN -->
+                <div class="screen" id="screen-attrition">
+                    <div class="screen-header">
+                        <div class="screen-title-desc">
+                            <h2>Attrition Intelligence & Retention Center</h2>
+                            <p>Real-time flight risk forecasts, voluntary departure drivers, and retention countermeasure tracking.</p>
+                        </div>
+                        <button class="btn btn-primary" onclick="alert('Simulating Stay Interview campaigns sent to High-Risk Sales Employees in West Region!')"><i data-lucide="mail"></i> Trigger Stay Interview Campaign</button>
+                    </div>
+
+                    <div class="inner-screen-grid">
+                        <div class="two-column-layout">
+                            <div class="half-card" id="card-attr-risk-map">
+                                <div class="card-header">
+                                    <span class="card-title">Flight Risk Heatmap by Department & Tenure</span>
+                                    <button class="btn-insight-toggle" onclick="toggleCardInsight('card-attr-risk-map')"><i data-lucide="sparkles"></i></button>
+                                </div>
+                                <div class="card-body">
+                                    <div class="chart-holder">
+                                        <div id="chart-attrition-heat-detailed"></div>
+                                    </div>
+                                </div>
+                                <div class="insight-overlay">
+                                    <div class="overlay-header">
+                                        <span class="overlay-title"><i data-lucide="sparkles"></i> AI Risk Heatmap Insight</span>
+                                        <button class="overlay-close" onclick="toggleCardInsight('card-attr-risk-map')">&times;</button>
+                                    </div>
+                                    <div class="overlay-body">
+                                        <p>Highest exit risk occurs between 1-3 years of tenure in Sales and Engineering roles. Compensation is the leading driver, followed by role dissatisfaction.</p>
+                                    </div>
+                                <div class="overlay-footer insight-buttons" style="margin-top: 0.75rem; display: flex; gap: 0.5rem; padding-bottom: 0.5rem;">
+                                    <button class="btn btn-outline" style="padding: 0.3rem 0.6rem; font-size: 0.7rem; flex: 1;">Explore Insight</button>
+                                    <button class="btn btn-primary" style="padding: 0.3rem 0.6rem; font-size: 0.7rem; flex: 1;">Take Action</button>
+                                </div>
+                            </div>
+                            
+                            </div>
+
+                            <div class="half-card" id="card-attr-drivers">
+                                <div class="card-header">
+                                    <span class="card-title">Top Exit Interview Driver Trends</span>
+                                    <button class="btn-insight-toggle" onclick="toggleCardInsight('card-attr-drivers')"><i data-lucide="sparkles"></i></button>
+                                </div>
+                                <div class="card-body">
+                                    <div class="chart-holder">
+                                        <div id="chart-exit-interview-drivers"></div>
+                                    </div>
+                                </div>
+                                <div class="insight-overlay">
+                                    <div class="overlay-header">
+                                        <span class="overlay-title"><i data-lucide="sparkles"></i> AI Exit Interview Trends</span>
+                                        <button class="overlay-close" onclick="toggleCardInsight('card-attr-drivers')">&times;</button>
+                                    </div>
+                                    <div class="overlay-body">
+                                        <p>"Compensation & Benefits" has increased by 14% as a primary driver year-over-year. Work-life balance claims are down 5%, reflecting successful hybrid policy enforcement.</p>
+                                    </div>
+                                <div class="overlay-footer insight-buttons" style="margin-top: 0.75rem; display: flex; gap: 0.5rem; padding-bottom: 0.5rem;">
+                                    <button class="btn btn-outline" style="padding: 0.3rem 0.6rem; font-size: 0.7rem; flex: 1;">Explore Insight</button>
+                                    <button class="btn btn-primary" style="padding: 0.3rem 0.6rem; font-size: 0.7rem; flex: 1;">Take Action</button>
+                                </div>
+                            </div>
+                            
+                            </div>
+                        </div>
+
+                        <div class="full-card" id="card-attr-retention">
+                            <div class="card-header">
+                                <span class="card-title">Retention Action Plan Tracker & ROI Tracker</span>
+                                <button class="btn-insight-toggle" onclick="toggleCardInsight('card-attr-retention')"><i data-lucide="sparkles"></i></button>
+                            </div>
+                            <div class="card-body">
+                                <div class="retention-table-container">
+                                    <table>
+                                        <thead>
+                                            <tr>
+                                                <th>Cohort Group</th>
+                                                <th>Action Program</th>
+                                                <th>FTEs Targeted</th>
+                                                <th>Total Cost</th>
+                                                <th>FTEs Retained</th>
+                                                <th>Mitigated Cost Saved</th>
+                                                <th>Success Rate</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td class="font-bold">Sales (West Region)</td>
+                                                <td>Out-of-cycle Salary Adjustments</td>
+                                                <td>120</td>
+                                                <td>$240,000</td>
+                                                <td>108</td>
+                                                <td>$1,080,000</td>
+                                                <td><span class="badge badge-success">90%</span></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="font-bold">Software Engineers (L3)</td>
+                                                <td>Equity Retention Grants</td>
+                                                <td>85</td>
+                                                <td>$425,000</td>
+                                                <td>72</td>
+                                                <td>$1,440,000</td>
+                                                <td><span class="badge badge-warning">84%</span></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="font-bold">Support Ops (India)</td>
+                                                <td>Span of Control & Workload Rebalancing</td>
+                                                <td>250</td>
+                                                <td>$45,000</td>
+                                                <td>185</td>
+                                                <td>$370,000</td>
+                                                <td><span class="badge badge-danger">74%</span></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="font-bold">Marketing Teams</td>
+                                                <td>Fast-track Promotion Reviews</td>
+                                                <td>45</td>
+                                                <td>$90,000</td>
+                                                <td>42</td>
+                                                <td>$420,000</td>
+                                                <td><span class="badge badge-success">93%</span></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="insight-overlay">
+                                <div class="overlay-header">
+                                    <span class="overlay-title"><i data-lucide="sparkles"></i> AI Retention Recommendations</span>
+                                    <button class="overlay-close" onclick="toggleCardInsight('card-attr-retention')">&times;</button>
+                                </div>
+                                <div class="overlay-body">
+                                    <p>Compensation adjustments have shown the highest ROI. Every $1.00 spent on West Region Sales compensation adjustment saved $4.50 in onboarding/termination costs.</p>
+                                </div>
+                            <div class="overlay-footer insight-buttons" style="margin-top: 0.75rem; display: flex; gap: 0.5rem; padding-bottom: 0.5rem;">
+                                    <button class="btn btn-outline" style="padding: 0.3rem 0.6rem; font-size: 0.7rem; flex: 1;">Explore Insight</button>
+                                    <button class="btn btn-primary" style="padding: 0.3rem 0.6rem; font-size: 0.7rem; flex: 1;">Take Action</button>
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 4. TALENT ACQUISITION SCREEN -->
+                <div class="screen" id="screen-talent">
+                    <div class="screen-header">
+                        <div class="screen-title-desc">
+                            <h2>Talent Acquisition Analytics</h2>
+                            <p>Evaluate pipeline health, conversion rates, recruitment source effectiveness, and diversity hiring stats.</p>
+                        </div>
+                    </div>
+
+                    <div class="inner-screen-grid">
+                        <div class="metrics-grid">
+                            <div class="metric-card" id="card-ta-tth">
+                                <div class="card-header">
+                                    <div class="header-left">
+                                        <div class="card-icon blue"><i data-lucide="clock"></i></div>
+                                        <span class="card-title">Time to Hire (Average)</span>
+                                    </div>
+                                    <button class="btn-insight-toggle" onclick="toggleCardInsight('card-ta-tth')"><i data-lucide="sparkles"></i></button>
+                                </div>
+                                <div class="card-body">
+                                    <span class="metric-value">28.6 days</span>
+                                    <span class="metric-change up-green"><i data-lucide="trending-down"></i> -4.2 days vs Q1</span>
+                                </div>
+                                <div class="insight-overlay">
+                                    <div class="overlay-header">
+                                        <span class="overlay-title"><i data-lucide="sparkles"></i> AI Time to Hire</span>
+                                        <button class="overlay-close" onclick="toggleCardInsight('card-ta-tth')">&times;</button>
+                                    </div>
+                                    <div class="overlay-body"><p>Automated HR screening reduced preliminary interviewing times by 20%.</p></div>
+                                <div class="overlay-footer insight-buttons" style="margin-top: 0.75rem; display: flex; gap: 0.5rem; padding-bottom: 0.5rem;">
+                                    <button class="btn btn-outline" style="padding: 0.3rem 0.6rem; font-size: 0.7rem; flex: 1;">Explore Insight</button>
+                                    <button class="btn btn-primary" style="padding: 0.3rem 0.6rem; font-size: 0.7rem; flex: 1;">Take Action</button>
+                                </div>
+                            </div>
+                            
+                            </div>
+
+                            <div class="metric-card" id="card-ta-cph">
+                                <div class="card-header">
+                                    <div class="header-left">
+                                        <div class="card-icon orange"><i data-lucide="dollar-sign"></i></div>
+                                        <span class="card-title">Average Cost per Hire</span>
+                                    </div>
+                                    <button class="btn-insight-toggle" onclick="toggleCardInsight('card-ta-cph')"><i data-lucide="sparkles"></i></button>
+                                </div>
+                                <div class="card-body">
+                                    <span class="metric-value">$4,152</span>
+                                    <span class="metric-change down-green"><i data-lucide="trending-down"></i> -6.3% vs Q1</span>
+                                </div>
+                                <div class="insight-overlay">
+                                    <div class="overlay-header">
+                                        <span class="overlay-title"><i data-lucide="sparkles"></i> AI Cost per Hire</span>
+                                        <button class="overlay-close" onclick="toggleCardInsight('card-ta-cph')">&times;</button>
+                                    </div>
+                                    <div class="overlay-body"><p>Supported by referral campaigns. Cost of referral hiring averages $1,200.</p></div>
+                                <div class="overlay-footer insight-buttons" style="margin-top: 0.75rem; display: flex; gap: 0.5rem; padding-bottom: 0.5rem;">
+                                    <button class="btn btn-outline" style="padding: 0.3rem 0.6rem; font-size: 0.7rem; flex: 1;">Explore Insight</button>
+                                    <button class="btn btn-primary" style="padding: 0.3rem 0.6rem; font-size: 0.7rem; flex: 1;">Take Action</button>
+                                </div>
+                            </div>
+                            
+                            </div>
+
+                            <div class="metric-card" id="card-ta-source">
+                                <div class="card-header">
+                                    <div class="header-left">
+                                        <div class="card-icon green"><i data-lucide="link"></i></div>
+                                        <span class="card-title">Referral Hiring Mix</span>
+                                    </div>
+                                    <button class="btn-insight-toggle" onclick="toggleCardInsight('card-ta-source')"><i data-lucide="sparkles"></i></button>
+                                </div>
+                                <div class="card-body">
+                                    <span class="metric-value">35.2%</span>
+                                    <span class="metric-change up-green"><i data-lucide="trending-up"></i> +5.4% vs Q1</span>
+                                </div>
+                                <div class="insight-overlay">
+                                    <div class="overlay-header">
+                                        <span class="overlay-title"><i data-lucide="sparkles"></i> AI Sourcing Mix</span>
+                                        <button class="overlay-close" onclick="toggleCardInsight('card-ta-source')">&times;</button>
+                                    </div>
+                                    <div class="overlay-body"><p>Referrals are our highest-quality sourcing channel with a 90-day retention rate of 94%.</p></div>
+                                <div class="overlay-footer insight-buttons" style="margin-top: 0.75rem; display: flex; gap: 0.5rem; padding-bottom: 0.5rem;">
+                                    <button class="btn btn-outline" style="padding: 0.3rem 0.6rem; font-size: 0.7rem; flex: 1;">Explore Insight</button>
+                                    <button class="btn btn-primary" style="padding: 0.3rem 0.6rem; font-size: 0.7rem; flex: 1;">Take Action</button>
+                                </div>
+                            </div>
+                            
+                            </div>
+
+                            <div class="metric-card" id="card-ta-acceptance">
+                                <div class="card-header">
+                                    <div class="header-left">
+                                        <div class="card-icon red"><i data-lucide="thumbs-up"></i></div>
+                                        <span class="card-title">Offer Acceptance Rate</span>
+                                    </div>
+                                    <button class="btn-insight-toggle" onclick="toggleCardInsight('card-ta-acceptance')"><i data-lucide="sparkles"></i></button>
+                                </div>
+                                <div class="card-body">
+                                    <span class="metric-value">78.4%</span>
+                                    <span class="metric-change down"><i data-lucide="trending-down"></i> -1.2% vs Q1</span>
+                                </div>
+                                <div class="insight-overlay">
+                                    <div class="overlay-header">
+                                        <span class="overlay-title"><i data-lucide="sparkles"></i> AI Offer Acceptance</span>
+                                        <button class="overlay-close" onclick="toggleCardInsight('card-ta-acceptance')">&times;</button>
+                                    </div>
+                                    <div class="overlay-body"><p>Offer rejections are mainly in software engineering due to competing counter-offers.</p></div>
+                                <div class="overlay-footer insight-buttons" style="margin-top: 0.75rem; display: flex; gap: 0.5rem; padding-bottom: 0.5rem;">
+                                    <button class="btn btn-outline" style="padding: 0.3rem 0.6rem; font-size: 0.7rem; flex: 1;">Explore Insight</button>
+                                    <button class="btn btn-primary" style="padding: 0.3rem 0.6rem; font-size: 0.7rem; flex: 1;">Take Action</button>
+                                </div>
+                            </div>
+                            
+                            </div>
+
+                            <div class="metric-card" id="card-ta-satisfaction">
+                                <div class="card-header">
+                                    <div class="header-left">
+                                        <div class="card-icon blue"><i data-lucide="user-check"></i></div>
+                                        <span class="card-title">Candidate Satisfaction</span>
+                                    </div>
+                                    <button class="btn-insight-toggle" onclick="toggleCardInsight('card-ta-satisfaction')"><i data-lucide="sparkles"></i></button>
+                                </div>
+                                <div class="card-body">
+                                    <span class="metric-value">4.6/5.0</span>
+                                    <span class="metric-change up-green"><i data-lucide="trending-up"></i> +0.2 pts vs Q1</span>
+                                </div>
+                                <div class="insight-overlay">
+                                    <div class="overlay-header">
+                                        <span class="overlay-title"><i data-lucide="sparkles"></i> AI Candidate Experience</span>
+                                        <button class="overlay-close" onclick="toggleCardInsight('card-ta-satisfaction')">&times;</button>
+                                    </div>
+                                    <div class="overlay-body"><p>Feedback loops after interviews improved candidate NPS by 18 points.</p></div>
+                                <div class="overlay-footer insight-buttons" style="margin-top: 0.75rem; display: flex; gap: 0.5rem; padding-bottom: 0.5rem;">
+                                    <button class="btn btn-outline" style="padding: 0.3rem 0.6rem; font-size: 0.7rem; flex: 1;">Explore Insight</button>
+                                    <button class="btn btn-primary" style="padding: 0.3rem 0.6rem; font-size: 0.7rem; flex: 1;">Take Action</button>
+                                </div>
+                            </div>
+                            
+                            </div>
+                        </div>
+
+                        <div class="two-column-layout">
+                            <div class="half-card" id="card-ta-funnel-detailed">
+                                <div class="card-header">
+                                    <span class="card-title">Recruitment Pipeline Funnel (YTD)</span>
+                                    <button class="btn-insight-toggle" onclick="toggleCardInsight('card-ta-funnel-detailed')"><i data-lucide="sparkles"></i></button>
+                                </div>
+                                <div class="card-body">
+                                    <div class="chart-holder">
+                                        <div id="chart-ta-funnel-large"></div>
+                                    </div>
+                                </div>
+                                <div class="insight-overlay">
+                                    <div class="overlay-header">
+                                        <span class="overlay-title"><i data-lucide="sparkles"></i> AI Pipeline Analysis</span>
+                                        <button class="overlay-close" onclick="toggleCardInsight('card-ta-funnel-detailed')">&times;</button>
+                                    </div>
+                                    <div class="overlay-body">
+                                        <p>Conversion from Screened to Interviewed is low at 18%. Suggests automated resume filter yields a high rate of mismatched candidates.</p>
+                                    </div>
+                                <div class="overlay-footer insight-buttons" style="margin-top: 0.75rem; display: flex; gap: 0.5rem; padding-bottom: 0.5rem;">
+                                    <button class="btn btn-outline" style="padding: 0.3rem 0.6rem; font-size: 0.7rem; flex: 1;">Explore Insight</button>
+                                    <button class="btn btn-primary" style="padding: 0.3rem 0.6rem; font-size: 0.7rem; flex: 1;">Take Action</button>
+                                </div>
+                            </div>
+                            
+                            </div>
+
+                            <div class="half-card" id="card-ta-sources-pie">
+                                <div class="card-header">
+                                    <span class="card-title">Hiring Channels Distribution & Success Ratio</span>
+                                    <button class="btn-insight-toggle" onclick="toggleCardInsight('card-ta-sources-pie')"><i data-lucide="sparkles"></i></button>
+                                </div>
+                                <div class="card-body">
+                                    <div class="chart-holder">
+                                        <div id="chart-ta-sources-large"></div>
+                                    </div>
+                                </div>
+                                <div class="insight-overlay">
+                                    <div class="overlay-header">
+                                        <span class="overlay-title"><i data-lucide="sparkles"></i> AI Sourcing Analysis</span>
+                                        <button class="overlay-close" onclick="toggleCardInsight('card-ta-sources-pie')">&times;</button>
+                                    </div>
+                                    <div class="overlay-body">
+                                        <p>Internal referrals represent 35% of hires but contribute 52% of "High Performer" labels in first-year appraisals. Recommend increasing referral rewards by 20%.</p>
+                                    </div>
+                                <div class="overlay-footer insight-buttons" style="margin-top: 0.75rem; display: flex; gap: 0.5rem; padding-bottom: 0.5rem;">
+                                    <button class="btn btn-outline" style="padding: 0.3rem 0.6rem; font-size: 0.7rem; flex: 1;">Explore Insight</button>
+                                    <button class="btn btn-primary" style="padding: 0.3rem 0.6rem; font-size: 0.7rem; flex: 1;">Take Action</button>
+                                </div>
+                            </div>
+                            
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 5. LEARNING & DEVELOPMENT SCREEN -->
+                <div class="screen" id="screen-learning">
+                    <div class="screen-header">
+                        <div class="screen-title-desc">
+                            <h2>Learning & Development ROI</h2>
+                            <p>Upskilling performance, program completion rates, training budgets, and internal mobility trackers.</p>
+                        </div>
+                    </div>
+
+                    <div class="inner-screen-grid">
+                        <div class="two-column-layout">
+                            <div class="half-card" id="card-ld-completion">
+                                <div class="card-header">
+                                    <span class="card-title">Training Hours & Completion Rate by Division</span>
+                                    <button class="btn-insight-toggle" onclick="toggleCardInsight('card-ld-completion')"><i data-lucide="sparkles"></i></button>
+                                </div>
+                                <div class="card-body">
+                                    <div class="chart-holder">
+                                        <div id="chart-ld-completion-bars"></div>
+                                    </div>
+                                </div>
+                                <div class="insight-overlay">
+                                    <div class="overlay-header">
+                                        <span class="overlay-title"><i data-lucide="sparkles"></i> AI L&D Completion Insights</span>
+                                        <button class="overlay-close" onclick="toggleCardInsight('card-ld-completion')">&times;</button>
+                                    </div>
+                                    <div class="overlay-body">
+                                        <p>Engineering has the highest completion rate (94%) driven by mandatory security updates. Sales remains lowest (62%) due to conflicts with field work.</p>
+                                    </div>
+                                <div class="overlay-footer insight-buttons" style="margin-top: 0.75rem; display: flex; gap: 0.5rem; padding-bottom: 0.5rem;">
+                                    <button class="btn btn-outline" style="padding: 0.3rem 0.6rem; font-size: 0.7rem; flex: 1;">Explore Insight</button>
+                                    <button class="btn btn-primary" style="padding: 0.3rem 0.6rem; font-size: 0.7rem; flex: 1;">Take Action</button>
+                                </div>
+                            </div>
+                            
+                            </div>
+
+                            <div class="half-card" id="card-ld-roi-scatter">
+                                <div class="card-header">
+                                    <span class="card-title">Training Program Cost vs Appraisal Impact</span>
+                                    <button class="btn-insight-toggle" onclick="toggleCardInsight('card-ld-roi-scatter')"><i data-lucide="sparkles"></i></button>
+                                </div>
+                                <div class="card-body">
+                                    <div class="chart-holder">
+                                        <div id="chart-ld-roi-bubble"></div>
+                                    </div>
+                                </div>
+                                <div class="insight-overlay">
+                                    <div class="overlay-header">
+                                        <span class="overlay-title"><i data-lucide="sparkles"></i> AI Training ROI Analytics</span>
+                                        <button class="overlay-close" onclick="toggleCardInsight('card-ld-roi-scatter')">&times;</button>
+                                    </div>
+                                    <div class="overlay-body">
+                                        <p>Data Analytics and Technical Leadership programs deliver the highest performance return relative to cost. Compliance training remains a low-impact high-cost item.</p>
+                                    </div>
+                                <div class="overlay-footer insight-buttons" style="margin-top: 0.75rem; display: flex; gap: 0.5rem; padding-bottom: 0.5rem;">
+                                    <button class="btn btn-outline" style="padding: 0.3rem 0.6rem; font-size: 0.7rem; flex: 1;">Explore Insight</button>
+                                    <button class="btn btn-primary" style="padding: 0.3rem 0.6rem; font-size: 0.7rem; flex: 1;">Take Action</button>
+                                </div>
+                            </div>
+                            
+                            </div>
+                        </div>
+
+                        <div class="full-card" id="card-ld-matrix">
+                            <div class="card-header">
+                                <span class="card-title">Internal Mobility & Skill Progression Map</span>
+                                <button class="btn-insight-toggle" onclick="toggleCardInsight('card-ld-matrix')"><i data-lucide="sparkles"></i></button>
+                            </div>
+                            <div class="card-body">
+                                <div class="ld-mobility-table-container">
+                                    <table>
+                                        <thead>
+                                            <tr>
+                                                <th>Original Title</th>
+                                                <th>Upskilled Domain</th>
+                                                <th>FTEs Promoted/Reassigned</th>
+                                                <th>Avg Performance Lift</th>
+                                                <th>Retention Rate Post-Move</th>
+                                                <th>Replacement Savings</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td class="font-bold">Junior Web Developers</td>
+                                                <td>Cloud Architecture</td>
+                                                <td>42</td>
+                                                <td class="text-green font-bold">+28%</td>
+                                                <td class="font-bold">96%</td>
+                                                <td>$546,000</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="font-bold">Operations Support</td>
+                                                <td>Data Engineering</td>
+                                                <td>28</td>
+                                                <td class="text-green font-bold">+24%</td>
+                                                <td class="font-bold">92%</td>
+                                                <td>$364,000</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="font-bold">HR Generalists</td>
+                                                <td>People Analytics</td>
+                                                <td>15</td>
+                                                <td class="text-green font-bold">+18%</td>
+                                                <td class="font-bold">100%</td>
+                                                <td>$195,000</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="font-bold">Sales Representatives</td>
+                                                <td>Technical Pre-Sales</td>
+                                                <td>32</td>
+                                                <td class="text-green font-bold">+31%</td>
+                                                <td class="font-bold">88%</td>
+                                                <td>$416,000</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="insight-overlay">
+                                <div class="overlay-header">
+                                    <span class="overlay-title"><i data-lucide="sparkles"></i> AI Skill Mobility Insights</span>
+                                    <button class="overlay-close" onclick="toggleCardInsight('card-ld-matrix')">&times;</button>
+                                </div>
+                                <div class="overlay-body">
+                                    <p>Internal mobility participants show 3x higher organizational loyalty. Promoting from within saved the organization $1.52M in recruitment agency fees over 12 months.</p>
+                                </div>
+                            <div class="overlay-footer insight-buttons" style="margin-top: 0.75rem; display: flex; gap: 0.5rem; padding-bottom: 0.5rem;">
+                                    <button class="btn btn-outline" style="padding: 0.3rem 0.6rem; font-size: 0.7rem; flex: 1;">Explore Insight</button>
+                                    <button class="btn btn-primary" style="padding: 0.3rem 0.6rem; font-size: 0.7rem; flex: 1;">Take Action</button>
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 6. COMPENSATION INTELLIGENCE SCREEN -->
+                <div class="screen" id="screen-compensation">
+                    <div class="screen-header">
+                        <div class="screen-title-desc">
+                            <h2>Compensation Intelligence</h2>
+                            <p>Benchmarking pay bands, gender pay disparity adjustments, and salary-hike simulation engines.</p>
+                        </div>
+                        <button class="btn btn-primary" onclick="runCompSimulation()"><i data-lucide="calculator"></i> Run Pay Equity Simulator</button>
+                    </div>
+
+                    <div class="inner-screen-grid">
+                        <div class="two-column-layout">
+                            <div class="half-card" id="card-comp-market">
+                                <div class="card-header">
+                                    <span class="card-title">Salary Benchmarks vs Market Median (by Job Level)</span>
+                                    <button class="btn-insight-toggle" onclick="toggleCardInsight('card-comp-market')"><i data-lucide="sparkles"></i></button>
+                                </div>
+                                <div class="card-body">
+                                    <div class="chart-holder">
+                                        <div id="chart-comp-benchmark-lines"></div>
+                                    </div>
+                                </div>
+                                <div class="insight-overlay">
+                                    <div class="overlay-header">
+                                        <span class="overlay-title"><i data-lucide="sparkles"></i> AI Benchmark Insights</span>
+                                        <button class="overlay-close" onclick="toggleCardInsight('card-comp-market')">&times;</button>
+                                    </div>
+                                    <div class="overlay-body">
+                                        <p>L2 & L3 Engineering roles are currently positioned 8% under market median. Represents a major risk vector for Q3/Q4 engineering attrition.</p>
+                                    </div>
+                                <div class="overlay-footer insight-buttons" style="margin-top: 0.75rem; display: flex; gap: 0.5rem; padding-bottom: 0.5rem;">
+                                    <button class="btn btn-outline" style="padding: 0.3rem 0.6rem; font-size: 0.7rem; flex: 1;">Explore Insight</button>
+                                    <button class="btn btn-primary" style="padding: 0.3rem 0.6rem; font-size: 0.7rem; flex: 1;">Take Action</button>
+                                </div>
+                            </div>
+                            
+                            </div>
+
+                            <div class="half-card" id="card-comp-gender">
+                                <div class="card-header">
+                                    <span class="card-title">Pay Equity Index Trend (2021 - 2024)</span>
+                                    <button class="btn-insight-toggle" onclick="toggleCardInsight('card-comp-gender')"><i data-lucide="sparkles"></i></button>
+                                </div>
+                                <div class="card-body">
+                                    <div class="chart-holder">
+                                        <div id="chart-comp-equity-trends"></div>
+                                    </div>
+                                </div>
+                                <div class="insight-overlay">
+                                    <div class="overlay-header">
+                                        <span class="overlay-title"><i data-lucide="sparkles"></i> AI Equity Index Trends</span>
+                                        <button class="overlay-close" onclick="toggleCardInsight('card-comp-gender')">&times;</button>
+                                    </div>
+                                    <div class="overlay-body">
+                                        <p>Pay parity improved from 0.91 in 2021 to 0.98 in 2024. Remaining gaps are located in senior leadership hires from outside sources.</p>
+                                    </div>
+                                <div class="overlay-footer insight-buttons" style="margin-top: 0.75rem; display: flex; gap: 0.5rem; padding-bottom: 0.5rem;">
+                                    <button class="btn btn-outline" style="padding: 0.3rem 0.6rem; font-size: 0.7rem; flex: 1;">Explore Insight</button>
+                                    <button class="btn btn-primary" style="padding: 0.3rem 0.6rem; font-size: 0.7rem; flex: 1;">Take Action</button>
+                                </div>
+                            </div>
+                            
+                            </div>
+                        </div>
+
+                        <div class="full-card" id="card-comp-allocator">
+                            <div class="card-header">
+                                <span class="card-title">Estimated Annual Cost for Pay Equity Adjustments (Simulated)</span>
+                                <button class="btn-insight-toggle" onclick="toggleCardInsight('card-comp-allocator')"><i data-lucide="sparkles"></i></button>
+                            </div>
+                            <div class="card-body">
+                                <div class="comp-simulator-card">
+                                    <div class="sim-sliders">
+                                        <div class="slider-group">
+                                            <label>Target Midpoint Benchmarking (90% - 110%)</label>
+                                            <input type="range" min="90" max="110" value="98" class="sim-slider" id="sim-target-midpoint" oninput="updateCompSimulation()">
+                                            <span class="slider-display-val" id="val-midpoint">98%</span>
+                                        </div>
+                                        <div class="slider-group">
+                                            <label>Merit Budget Allocation (1.0% - 6.0%)</label>
+                                            <input type="range" min="10" max="60" value="35" class="sim-slider" id="sim-merit-budget" oninput="updateCompSimulation()">
+                                            <span class="slider-display-val" id="val-merit">3.5%</span>
+                                        </div>
+                                    </div>
+                                    <div class="sim-results">
+                                        <div class="sim-result-item">
+                                            <span class="sim-res-lbl">Required Pay Equity Correction</span>
+                                            <span class="sim-res-val" id="val-equity-correction">$184,500</span>
+                                        </div>
+                                        <div class="sim-result-item">
+                                            <span class="sim-res-lbl">Estimated Retained FTEs</span>
+                                            <span class="sim-res-val text-green" id="val-retained-count">112 Employees</span>
+                                        </div>
+                                        <div class="sim-result-item">
+                                            <span class="sim-res-lbl">Net Onboarding Cost Savings</span>
+                                            <span class="sim-res-val text-blue" id="val-savings-comp">$1,120,000</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="insight-overlay">
+                                <div class="overlay-header">
+                                    <span class="overlay-title"><i data-lucide="sparkles"></i> AI Simulation Insights</span>
+                                    <button class="overlay-close" onclick="toggleCardInsight('card-comp-allocator')">&times;</button>
+                                </div>
+                                <div class="overlay-body">
+                                    <p>Tuning target midpoint benchmarking to 98% yields the maximum return on retention spend. Pushing past 102% yields diminishing returns relative to budget size.</p>
+                                </div>
+                            <div class="overlay-footer insight-buttons" style="margin-top: 0.75rem; display: flex; gap: 0.5rem; padding-bottom: 0.5rem;">
+                                    <button class="btn btn-outline" style="padding: 0.3rem 0.6rem; font-size: 0.7rem; flex: 1;">Explore Insight</button>
+                                    <button class="btn btn-primary" style="padding: 0.3rem 0.6rem; font-size: 0.7rem; flex: 1;">Take Action</button>
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 7. ENGAGEMENT CORRELATION SCREEN -->
+                <div class="screen" id="screen-engagement">
+                    <div class="screen-header">
+                        <div class="screen-title-desc">
+                            <h2>Engagement Correlation Engine</h2>
+                            <p>Perform statistical correlation between pulse surveys, overall productivity metrics, and management feedback scores.</p>
+                        </div>
+                    </div>
+
+                    <div class="inner-screen-grid">
+                        <div class="two-column-layout">
+                            <div class="half-card" id="card-eng-corr-scatter">
+                                <div class="card-header">
+                                    <span class="card-title">Detailed Engagement vs Voluntary Turnover Scatter</span>
+                                    <button class="btn-insight-toggle" onclick="toggleCardInsight('card-eng-corr-scatter')"><i data-lucide="sparkles"></i></button>
+                                </div>
+                                <div class="card-body">
+                                    <div class="chart-holder-large">
+                                        <div id="chart-engagement-scatter-large"></div>
+                                    </div>
+                                </div>
+                                <div class="insight-overlay">
+                                    <div class="overlay-header">
+                                        <span class="overlay-title"><i data-lucide="sparkles"></i> AI Correlation Insights</span>
+                                        <button class="overlay-close" onclick="toggleCardInsight('card-eng-corr-scatter')">&times;</button>
+                                    </div>
+                                    <div class="overlay-body">
+                                        <p>Correlation coefficient: <strong>0.78 (Strong Positive)</strong>. High voluntary exit rates correlate strongly with teams scoring under 65 in quarterly pulse reviews.</p>
+                                    </div>
+                                <div class="overlay-footer insight-buttons" style="margin-top: 0.75rem; display: flex; gap: 0.5rem; padding-bottom: 0.5rem;">
+                                    <button class="btn btn-outline" style="padding: 0.3rem 0.6rem; font-size: 0.7rem; flex: 1;">Explore Insight</button>
+                                    <button class="btn btn-primary" style="padding: 0.3rem 0.6rem; font-size: 0.7rem; flex: 1;">Take Action</button>
+                                </div>
+                            </div>
+                            
+                            </div>
+
+                            <div class="half-card" id="card-eng-drivers-bar">
+                                <div class="card-header">
+                                    <span class="card-title">Pulse Survey Sentiment Breakdown by Department</span>
+                                    <button class="btn-insight-toggle" onclick="toggleCardInsight('card-eng-drivers-bar')"><i data-lucide="sparkles"></i></button>
+                                </div>
+                                <div class="card-body">
+                                    <div class="chart-holder-large">
+                                        <div id="chart-engagement-sentiment-bars"></div>
+                                    </div>
+                                </div>
+                                <div class="insight-overlay">
+                                    <div class="overlay-header">
+                                        <span class="overlay-title"><i data-lucide="sparkles"></i> AI Sentiment Insights</span>
+                                        <button class="overlay-close" onclick="toggleCardInsight('card-eng-drivers-bar')">&times;</button>
+                                    </div>
+                                    <div class="overlay-body">
+                                        <p>Engineering sentiment has dropped 8% this month due to legacy system maintenance overheads. Marketing reports a positive sentiment increase of 12% after restructuring team goals.</p>
+                                    </div>
+                                <div class="overlay-footer insight-buttons" style="margin-top: 0.75rem; display: flex; gap: 0.5rem; padding-bottom: 0.5rem;">
+                                    <button class="btn btn-outline" style="padding: 0.3rem 0.6rem; font-size: 0.7rem; flex: 1;">Explore Insight</button>
+                                    <button class="btn btn-primary" style="padding: 0.3rem 0.6rem; font-size: 0.7rem; flex: 1;">Take Action</button>
+                                </div>
+                            </div>
+                            
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 8. HR OPERATIONS SCREEN -->
+                <div class="screen" id="screen-operations">
+                    <div class="screen-header">
+                        <div class="screen-title-desc">
+                            <h2>HR Operations & SLA Center</h2>
+                            <p>Track ticket volumes, resolution SLAs, employee onboarding pipelines, and system process efficiency rates.</p>
+                        </div>
+                    </div>
+
+                    <div class="inner-screen-grid">
+                        <div class="two-column-layout">
+                            <div class="half-card" id="card-ops-sla">
+                                <div class="card-header">
+                                    <span class="card-title">HR Ticket SLA Achievement Rates</span>
+                                    <button class="btn-insight-toggle" onclick="toggleCardInsight('card-ops-sla')"><i data-lucide="sparkles"></i></button>
+                                </div>
+                                <div class="card-body">
+                                    <div class="chart-holder">
+                                        <div id="chart-ops-sla-radar"></div>
+                                    </div>
+                                </div>
+                                <div class="insight-overlay">
+                                    <div class="overlay-header">
+                                        <span class="overlay-title"><i data-lucide="sparkles"></i> AI Operations SLA Insights</span>
+                                        <button class="overlay-close" onclick="toggleCardInsight('card-ops-sla')">&times;</button>
+                                    </div>
+                                    <div class="overlay-body">
+                                        <p>Onboarding SLA achievement is at 93%. Query Resolution remains steady at 94%. Leave management shows a slight dip to 90% during peak holiday periods.</p>
+                                    </div>
+                                <div class="overlay-footer insight-buttons" style="margin-top: 0.75rem; display: flex; gap: 0.5rem; padding-bottom: 0.5rem;">
+                                    <button class="btn btn-outline" style="padding: 0.3rem 0.6rem; font-size: 0.7rem; flex: 1;">Explore Insight</button>
+                                    <button class="btn btn-primary" style="padding: 0.3rem 0.6rem; font-size: 0.7rem; flex: 1;">Take Action</button>
+                                </div>
+                            </div>
+                            
+                            </div>
+
+                            <div class="half-card" id="card-ops-tickets">
+                                <div class="card-header">
+                                    <span class="card-title">Average Ticket Resolution Time (hours)</span>
+                                    <button class="btn-insight-toggle" onclick="toggleCardInsight('card-ops-tickets')"><i data-lucide="sparkles"></i></button>
+                                </div>
+                                <div class="card-body">
+                                    <div class="chart-holder">
+                                        <div id="chart-ops-tickets-lines"></div>
+                                    </div>
+                                </div>
+                                <div class="insight-overlay">
+                                    <div class="overlay-header">
+                                        <span class="overlay-title"><i data-lucide="sparkles"></i> AI Ticket Efficiency</span>
+                                        <button class="overlay-close" onclick="toggleCardInsight('card-ops-tickets')">&times;</button>
+                                    </div>
+                                    <div class="overlay-body">
+                                        <p>Resolution times dropped from 24 hrs to 14.8 hrs over 6 months, driven by AI-based routing of IT and payroll queries to matching operators.</p>
+                                    </div>
+                                <div class="overlay-footer insight-buttons" style="margin-top: 0.75rem; display: flex; gap: 0.5rem; padding-bottom: 0.5rem;">
+                                    <button class="btn btn-outline" style="padding: 0.3rem 0.6rem; font-size: 0.7rem; flex: 1;">Explore Insight</button>
+                                    <button class="btn btn-primary" style="padding: 0.3rem 0.6rem; font-size: 0.7rem; flex: 1;">Take Action</button>
+                                </div>
+                            </div>
+                            
+                            </div>
+                        </div>
+
+                        <div class="full-card" id="card-ops-onboarding-sla">
+                            <div class="card-header">
+                                <span class="card-title">HR Operations Process Performance Metrics</span>
+                                <button class="btn-insight-toggle" onclick="toggleCardInsight('card-ops-onboarding-sla')"><i data-lucide="sparkles"></i></button>
+                            </div>
+                            <div class="card-body">
+                                <div class="ops-process-table-container">
+                                    <table>
+                                        <thead>
+                                            <tr>
+                                                <th>Process Stream</th>
+                                                <th>Monthly Count</th>
+                                                <th>Avg Resolution Cycle</th>
+                                                <th>SLA Goal</th>
+                                                <th>Actual SLA Met</th>
+                                                <th>Bottleneck Trigger</th>
+                                                <th>Performance Trend</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td class="font-bold">New Joiner Onboarding</td>
+                                                <td>124</td>
+                                                <td>3.2 days</td>
+                                                <td>5.0 days</td>
+                                                <td class="text-green font-bold">93%</td>
+                                                <td>Background Check delays (external agency)</td>
+                                                <td><span class="text-green font-bold"><i data-lucide="trending-up"></i> Improving</span></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="font-bold">Leave Approvals</td>
+                                                <td>1,840</td>
+                                                <td>0.5 days</td>
+                                                <td>1.0 days</td>
+                                                <td class="text-green font-bold">90%</td>
+                                                <td>Manager delay in reviewing requests</td>
+                                                <td><span class="text-yellow font-bold"><i data-lucide="minus"></i> Flat</span></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="font-bold">Payroll Discrepancy Queries</td>
+                                                <td>48</td>
+                                                <td>1.8 days</td>
+                                                <td>2.0 days</td>
+                                                <td class="text-green font-bold">94%</td>
+                                                <td>Manual payslip review cycle</td>
+                                                <td><span class="text-green font-bold"><i data-lucide="trending-up"></i> Improving</span></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="font-bold">Visa Sponsorship Petitions</td>
+                                                <td>12</td>
+                                                <td>14.5 days</td>
+                                                <td>15.0 days</td>
+                                                <td class="text-red font-bold">82%</td>
+                                                <td>Legal review backlog & embassy response rates</td>
+                                                <td><span class="text-red font-bold"><i data-lucide="trending-down"></i> Declining</span></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="insight-overlay">
+                                <div class="overlay-header">
+                                    <span class="overlay-title"><i data-lucide="sparkles"></i> AI Process Diagnostics</span>
+                                    <button class="overlay-close" onclick="toggleCardInsight('card-ops-onboarding-sla')">&times;</button>
+                                </div>
+                                <div class="overlay-body">
+                                    <p>Visa Petitions represent our largest SLA fail point due to heavy external dependencies. Suggests starting visa processing 14 days earlier in the recruitment pipeline.</p>
+                                </div>
+                            <div class="overlay-footer insight-buttons" style="margin-top: 0.75rem; display: flex; gap: 0.5rem; padding-bottom: 0.5rem;">
+                                    <button class="btn btn-outline" style="padding: 0.3rem 0.6rem; font-size: 0.7rem; flex: 1;">Explore Insight</button>
+                                    <button class="btn btn-primary" style="padding: 0.3rem 0.6rem; font-size: 0.7rem; flex: 1;">Take Action</button>
+                                </div>
+                            </div>
+                            
+                        </div>
+                </div>
+
+                <!-- 9. PROJECT MANAGEMENT SCREEN -->
+                <div class="screen" id="screen-projects">
+                    <div class="screen-header">
+                        <div class="screen-title-desc">
+                            <h2>Project Staffing & Allocation Intelligence</h2>
+                            <p>Monitor real-time project allocations, analyze utilization metrics, and optimize team staffing using predictive AI insights.</p>
+                        </div>
+                        <button class="btn btn-primary" onclick="simulateProjectStaffing()"><i data-lucide="sparkles"></i> Run AI Project Staffing Optimizer</button>
+                    </div>
+
+                    <!-- Metrics Grid (5 Cards) -->
+                    <div class="metrics-grid">
+                        <!-- Card 1: Active Projects -->
+                        <div class="metric-card" id="card-projects-active">
+                            <div class="card-header">
+                                <div class="header-left">
+                                    <div class="card-icon blue"><i data-lucide="briefcase"></i></div>
+                                    <span class="card-title">Active Projects</span>
+                                </div>
+                                <button class="btn-insight-toggle" onclick="toggleCardInsight('card-projects-active')">
+                                    <i data-lucide="sparkles"></i>
+                                </button>
+                            </div>
+                            <div class="card-body">
+                                <div class="metric-value-container">
+                                    <span class="metric-value">142</span>
+                                    <span class="metric-change up"><i data-lucide="trending-up"></i> +8 vs last month</span>
+                                </div>
+                                <div class="metric-chart">
+                                    <div id="chart-sparkline-projects-active"></div>
+                                </div>
+                            </div>
+                            <!-- AI Insight Overlay -->
+                            <div class="insight-overlay">
+                                <div class="overlay-header">
+                                    <span class="overlay-title"><i data-lucide="sparkles"></i> AI Active Projects Insight</span>
+                                    <button class="overlay-close" onclick="toggleCardInsight('card-projects-active')">&times;</button>
+                                </div>
+                                <div class="overlay-body">
+                                    <p>Active projects increased to 142. Resource constraints in Engineering have delayed 4 projects, and 8 are in critical delivery paths.</p>
+                                </div>
+                                <div class="overlay-footer insight-buttons" style="margin-top: 0.75rem; display: flex; gap: 0.5rem; padding-bottom: 0.5rem;">
+                                    <button class="btn btn-outline" style="padding: 0.3rem 0.6rem; font-size: 0.7rem; flex: 1;">Explore Insight</button>
+                                    <button class="btn btn-primary" style="padding: 0.3rem 0.6rem; font-size: 0.7rem; flex: 1;">Take Action</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Card 2: Resource Utilization -->
+                        <div class="metric-card" id="card-projects-utilization">
+                            <div class="card-header">
+                                <div class="header-left">
+                                    <div class="card-icon green"><i data-lucide="users"></i></div>
+                                    <span class="card-title">Resource Utilization</span>
+                                </div>
+                                <button class="btn-insight-toggle" onclick="toggleCardInsight('card-projects-utilization')">
+                                    <i data-lucide="sparkles"></i>
+                                </button>
+                            </div>
+                            <div class="card-body">
+                                <div class="metric-value-container">
+                                    <span class="metric-value">88.5%</span>
+                                    <span class="metric-change up-green"><i data-lucide="trending-up"></i> +1.2% vs last month</span>
+                                </div>
+                                <div class="metric-chart">
+                                    <div id="chart-sparkline-projects-utilization"></div>
+                                </div>
+                            </div>
+                            <!-- AI Insight Overlay -->
+                            <div class="insight-overlay">
+                                <div class="overlay-header">
+                                    <span class="overlay-title"><i data-lucide="sparkles"></i> AI Utilization Insight</span>
+                                    <button class="overlay-close" onclick="toggleCardInsight('card-projects-utilization')">&times;</button>
+                                </div>
+                                <div class="overlay-body">
+                                    <p>Average utilization is at 88.5%. Mid-level engineers are at 94% (risk of burnout), while senior architects are under-allocated at 78%.</p>
+                                </div>
+                                <div class="overlay-footer insight-buttons" style="margin-top: 0.75rem; display: flex; gap: 0.5rem; padding-bottom: 0.5rem;">
+                                    <button class="btn btn-outline" style="padding: 0.3rem 0.6rem; font-size: 0.7rem; flex: 1;">Explore Insight</button>
+                                    <button class="btn btn-primary" style="padding: 0.3rem 0.6rem; font-size: 0.7rem; flex: 1;">Take Action</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Card 3: Talent Bench Count -->
+                        <div class="metric-card" id="card-projects-bench">
+                            <div class="card-header">
+                                <div class="header-left">
+                                    <div class="card-icon red"><i data-lucide="user-check"></i></div>
+                                    <span class="card-title">Talent Bench</span>
+                                </div>
+                                <button class="btn-insight-toggle" onclick="toggleCardInsight('card-projects-bench')">
+                                    <i data-lucide="sparkles"></i>
+                                </button>
+                            </div>
+                            <div class="card-body">
+                                <div class="metric-value-container">
+                                    <span class="metric-value">38<span class="metric-value-sub"> FTEs</span></span>
+                                    <span class="metric-change down-green"><i data-lucide="trending-down"></i> -12 vs last month</span>
+                                </div>
+                                <div class="metric-chart">
+                                    <div id="chart-sparkline-projects-bench"></div>
+                                </div>
+                            </div>
+                            <!-- AI Insight Overlay -->
+                            <div class="insight-overlay">
+                                <div class="overlay-header">
+                                    <span class="overlay-title"><i data-lucide="sparkles"></i> AI Talent Bench Insight</span>
+                                    <button class="overlay-close" onclick="toggleCardInsight('card-projects-bench')">&times;</button>
+                                </div>
+                                <div class="overlay-body">
+                                    <p>Talent bench has decreased to 38 FTEs. Sourcing needs are high for DevOps and Full Stack Node.js developers.</p>
+                                </div>
+                                <div class="overlay-footer insight-buttons" style="margin-top: 0.75rem; display: flex; gap: 0.5rem; padding-bottom: 0.5rem;">
+                                    <button class="btn btn-outline" style="padding: 0.3rem 0.6rem; font-size: 0.7rem; flex: 1;">Explore Insight</button>
+                                    <button class="btn btn-primary" style="padding: 0.3rem 0.6rem; font-size: 0.7rem; flex: 1;">Take Action</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Card 4: Open Project Vacancies -->
+                        <div class="metric-card" id="card-projects-vacancies">
+                            <div class="card-header">
+                                <div class="header-left">
+                                    <div class="card-icon orange"><i data-lucide="user-plus"></i></div>
+                                    <span class="card-title">Open Vacancies</span>
+                                </div>
+                                <button class="btn-insight-toggle" onclick="toggleCardInsight('card-projects-vacancies')">
+                                    <i data-lucide="sparkles"></i>
+                                </button>
+                            </div>
+                            <div class="card-body">
+                                <div class="metric-value-container">
+                                    <span class="metric-value">24</span>
+                                    <span class="metric-change up"><i data-lucide="trending-up"></i> +6 vs last month</span>
+                                </div>
+                                <div class="metric-chart">
+                                    <div id="chart-sparkline-projects-vacancies"></div>
+                                </div>
+                            </div>
+                            <!-- AI Insight Overlay -->
+                            <div class="insight-overlay">
+                                <div class="overlay-header">
+                                    <span class="overlay-title"><i data-lucide="sparkles"></i> AI Project Vacancy Insight</span>
+                                    <button class="overlay-close" onclick="toggleCardInsight('card-projects-vacancies')">&times;</button>
+                                </div>
+                                <div class="overlay-body">
+                                    <p>24 open project roles. Average time-to-fill project roles has crept up to 18.5 days due to specialized skill requirements.</p>
+                                </div>
+                                <div class="overlay-footer insight-buttons" style="margin-top: 0.75rem; display: flex; gap: 0.5rem; padding-bottom: 0.5rem;">
+                                    <button class="btn btn-outline" style="padding: 0.3rem 0.6rem; font-size: 0.7rem; flex: 1;">Explore Insight</button>
+                                    <button class="btn btn-primary" style="padding: 0.3rem 0.6rem; font-size: 0.7rem; flex: 1;">Take Action</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Card 5: Staffing SLA -->
+                        <div class="metric-card" id="card-projects-sla">
+                            <div class="card-header">
+                                <div class="header-left">
+                                    <div class="card-icon purple"><i data-lucide="clock"></i></div>
+                                    <span class="card-title">Staffing SLA</span>
+                                </div>
+                                <button class="btn-insight-toggle" onclick="toggleCardInsight('card-projects-sla')">
+                                    <i data-lucide="sparkles"></i>
+                                </button>
+                            </div>
+                            <div class="card-body">
+                                <div class="metric-value-container">
+                                    <span class="metric-value">91%</span>
+                                    <span class="metric-change down"><i data-lucide="trending-up"></i> -1.5% vs last month</span>
+                                </div>
+                                <div class="metric-chart">
+                                    <div id="chart-sparkline-projects-sla"></div>
+                                </div>
+                            </div>
+                            <!-- AI Insight Overlay -->
+                            <div class="insight-overlay">
+                                <div class="overlay-header">
+                                    <span class="overlay-title"><i data-lucide="sparkles"></i> AI Staffing SLA Insight</span>
+                                    <button class="overlay-close" onclick="toggleCardInsight('card-projects-sla')">&times;</button>
+                                </div>
+                                <div class="overlay-body">
+                                    <p>Staffing SLA is at 91%, just below the 95% target. Delayed background checks and client onboarding delays are key bottlenecks.</p>
+                                </div>
+                                <div class="overlay-footer insight-buttons" style="margin-top: 0.75rem; display: flex; gap: 0.5rem; padding-bottom: 0.5rem;">
+                                    <button class="btn btn-outline" style="padding: 0.3rem 0.6rem; font-size: 0.7rem; flex: 1;">Explore Insight</button>
+                                    <button class="btn btn-primary" style="padding: 0.3rem 0.6rem; font-size: 0.7rem; flex: 1;">Take Action</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Main Intelligence Section (2-Column) -->
+                    <div class="intelligence-grid">
+                        <!-- Column 1: Staffing Capacity & Utilization Trend -->
+                        <div class="intel-card" id="intel-projects-utilization-trend">
+                            <div class="intel-card-header">
+                                <div class="intel-card-title-container">
+                                    <span class="intel-title">Staffing Capacity & Utilization Trend</span>
+                                    <span class="tooltip-trigger" data-tooltip="Compares available team capacity, assigned hours, and AI-forecasted project demand.">
+                                        <i data-lucide="info"></i>
+                                    </span>
+                                </div>
+                                <button class="btn-insight-toggle" onclick="toggleCardInsight('intel-projects-utilization-trend')">
+                                    <i data-lucide="sparkles" style="width: 18px; height: 18px;"></i> AI Insights
+                                </button>
+                            </div>
+                            <div class="intel-card-content flex-col">
+                                <div class="chart-holder-large">
+                                    <div id="chart-projects-utilization-trend"></div>
+                                </div>
+                            </div>
+                            <!-- AI Insight Overlay -->
+                            <div class="insight-overlay">
+                                <div class="overlay-header">
+                                    <span class="overlay-title"><i data-lucide="sparkles"></i> Capacity Analysis</span>
+                                    <button class="overlay-close" onclick="toggleCardInsight('intel-projects-utilization-trend')">&times;</button>
+                                </div>
+                                <div class="overlay-body">
+                                    <p>Resource utilization is projected to exceed capacity by Q3 due to new project sign-offs. Releasing 15 bench members to active projects will stabilize utilization levels to a sustainable 86%.</p>
+                                </div>
+                                <div class="overlay-footer insight-buttons" style="margin-top: 0.75rem; display: flex; gap: 0.5rem; padding-bottom: 0.5rem;">
+                                    <button class="btn btn-outline" style="padding: 0.3rem 0.6rem; font-size: 0.7rem; flex: 1;">Explore Insight</button>
+                                    <button class="btn btn-primary" style="padding: 0.3rem 0.6rem; font-size: 0.7rem; flex: 1;">Take Action</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Column 2: Detailed Project Allocation & Delivery Risk -->
+                        <div class="intel-card" id="intel-projects-allocation-risk">
+                            <div class="intel-card-header">
+                                <div class="intel-card-title-container">
+                                    <span class="intel-title">Project Allocation & Delivery Risk</span>
+                                    <span class="tooltip-trigger" data-tooltip="List of critical active projects, current allocation rates, and AI delivery risk score.">
+                                        <i data-lucide="info"></i>
+                                    </span>
+                                </div>
+                                <button class="btn-insight-toggle" onclick="toggleCardInsight('intel-projects-allocation-risk')">
+                                    <i data-lucide="sparkles" style="width: 18px; height: 18px;"></i> AI Insights
+                                </button>
+                            </div>
+                            <div class="intel-card-content flex-col">
+                                <div class="projects-table-container">
+                                    <table>
+                                        <thead>
+                                            <tr>
+                                                <th>Project Name</th>
+                                                <th>Allocated FTEs</th>
+                                                <th>Avg Experience</th>
+                                                <th>Delivery Risk</th>
+                                                <th>Risk Factor</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td class="font-bold">NextGen Fintech Platform</td>
+                                                <td>24 / 28</td>
+                                                <td>4.2 yrs</td>
+                                                <td><span class="badge badge-danger font-bold">HIGH RISK</span></td>
+                                                <td>Understaffed by 4 Senior Backend Developers</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="font-bold">Automated Retail Integration</td>
+                                                <td>12 / 12</td>
+                                                <td>3.1 yrs</td>
+                                                <td><span class="badge badge-warning font-bold">MEDIUM RISK</span></td>
+                                                <td>High junior developer concentration (60%)</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="font-bold">Data Lake Migration Phase 2</td>
+                                                <td>18 / 18</td>
+                                                <td>5.5 yrs</td>
+                                                <td><span class="badge badge-success font-bold">LOW RISK</span></td>
+                                                <td>Fully staffed with experienced architects</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="font-bold">Logistics Router Optimization</td>
+                                                <td>8 / 10</td>
+                                                <td>3.8 yrs</td>
+                                                <td><span class="badge badge-warning font-bold">MEDIUM RISK</span></td>
+                                                <td>DevOps architect resigned; vacancy open</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <!-- AI Insight Overlay -->
+                            <div class="insight-overlay">
+                                <div class="overlay-header">
+                                    <span class="overlay-title"><i data-lucide="sparkles"></i> AI Staffing Recommendations</span>
+                                    <button class="overlay-close" onclick="toggleCardInsight('intel-projects-allocation-risk')">&times;</button>
+                                </div>
+                                <div class="overlay-body">
+                                    <p>Fintech Platform risk can be mitigated by transferring 2 senior engineers currently on the bench and sourcing 2 contractors immediately.</p>
+                                </div>
+                                <div class="overlay-footer insight-buttons" style="margin-top: 0.75rem; display: flex; gap: 0.5rem; padding-bottom: 0.5rem;">
+                                    <button class="btn btn-outline" style="padding: 0.3rem 0.6rem; font-size: 0.7rem; flex: 1;">Explore Insight</button>
+                                    <button class="btn btn-primary" style="padding: 0.3rem 0.6rem; font-size: 0.7rem; flex: 1;">Take Action</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Project Staffing Simulator / Scenario Planner (Full Card) -->
+                    <div class="full-card" id="card-projects-simulator" style="margin-top: 1.25rem;">
+                        <div class="card-header">
+                            <span class="card-title">AI Project Staffing & Capacity Simulator</span>
+                            <span class="tooltip-trigger" data-tooltip="Simulate how incoming project backlogs and changes to talent bench release rates impact utilization and hiring needs.">
+                                <i data-lucide="info"></i>
+                            </span>
+                        </div>
+                        <div class="card-body">
+                            <div class="comp-simulator-card">
+                                <div class="sim-sliders">
+                                    <div class="slider-group">
+                                        <div style="display: flex; justify-content: space-between;">
+                                            <label for="sim-project-backlog">Incoming Project Backlog (New Projects)</label>
+                                            <span class="slider-display-val" id="val-project-backlog">5 Projects</span>
+                                        </div>
+                                        <input type="range" min="1" max="20" value="5" class="sim-slider" id="sim-project-backlog" oninput="updateProjectsSimulation()">
+                                    </div>
+                                    <div class="slider-group">
+                                        <div style="display: flex; justify-content: space-between;">
+                                            <label for="sim-bench-release">Talent Bench Release Buffer (FTEs/mo)</label>
+                                            <span class="slider-display-val" id="val-bench-release">10 FTEs</span>
+                                        </div>
+                                        <input type="range" min="0" max="30" value="10" class="sim-slider" id="sim-bench-release" oninput="updateProjectsSimulation()">
+                                    </div>
+                                </div>
+                                <div class="sim-results">
+                                    <div class="sim-result-item">
+                                        <span class="sim-res-lbl">Projected Average Utilization</span>
+                                        <span class="sim-res-val text-blue" id="val-sim-projects-utilization">88.5%</span>
+                                    </div>
+                                    <div class="sim-result-item">
+                                        <span class="sim-res-lbl">Monthly Project Bench Cost</span>
+                                        <span class="sim-res-val text-red" id="val-sim-projects-bench-cost">$152,000</span>
+                                    </div>
+                                    <div class="sim-result-item">
+                                        <span class="sim-res-lbl">Net Talent Sourcing Demand</span>
+                                        <span class="sim-res-val text-green" id="val-sim-projects-sourcing">0 FTEs</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </main>
+
+        <!-- RIGHT SIDE PANEL (INTELLIGENCE & NOTIFICATION) -->
+        <aside class="right-panel">
+    <button id="right-panel-toggle-btn" class="btn-text-link" style="position:absolute;top:0.5rem;right:0.5rem;z-index:10;">
+        <i data-lucide="chevron-left"></i>
+    </button>
+            <!-- Ask icogz BETA Section -->
+            <div class="right-panel-section panel-ask-icogz">
+                <div class="section-header-row">
+                    <span class="section-title">Ask icogz</span>
+                    <span class="badge badge-beta">BETA</span>
+                </div>
+                
+                <div class="popular-queries">
+                    <span class="section-subtitle">Popular queries</span>
+                    <div class="query-pills">
+                        <button class="query-pill" onclick="triggerAskQuery('Why is attrition high in Engineering?')">
+                            <span>Why is attrition high in Engineering?</span>
+                            <i data-lucide="arrow-right"></i>
+                        </button>
+                        <button class="query-pill" onclick="triggerAskQuery('Which teams have low engagement but high performance?')">
+                            <span>Which teams have low engagement but high performance?</span>
+                            <i data-lucide="arrow-right"></i>
+                        </button>
+                        <button class="query-pill" onclick="triggerAskQuery('Show skill gaps in critical roles')">
+                            <span>Show skill gaps in critical roles</span>
+                            <i data-lucide="arrow-right"></i>
+                        </button>
+                        <button class="query-pill" onclick="triggerAskQuery('What is the impact of training on performance?')">
+                            <span>What is the impact of training on performance?</span>
+                            <i data-lucide="arrow-right"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="ask-chat-input-container">
+                    <div class="chat-input-wrapper">
+                        <input type="text" placeholder="Ask a new question" id="ask-chat-input" onkeyup="checkChatSubmit(event)">
+                        <button class="chat-submit-btn" id="ask-chat-submit" onclick="submitAskChat()">
+                            <i data-lucide="sparkles"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Alerts & Notifications Section -->
+            <div class="right-panel-section panel-alerts">
+                <div class="section-header-row">
+                    <span class="section-title">Alerts & Notifications</span>
+                    <button class="btn-text-link">View all</button>
+                </div>
+
+                <div class="alerts-list">
+                    <div class="alert-item unread">
+                        <div class="alert-indicator bg-danger"></div>
+                        <div class="alert-body">
+                            <span class="alert-desc">High attrition risk detected in <strong>Engineering – West Region</strong></span>
+                            <span class="alert-time">32 min ago</span>
+                        </div>
+                    </div>
+                    <div class="alert-item">
+                        <div class="alert-indicator bg-warning"></div>
+                        <div class="alert-body">
+                            <span class="alert-desc"><strong>5 critical roles</strong> have &gt; 30 days vacant</span>
+                            <span class="alert-time">1 hr ago</span>
+                        </div>
+                    </div>
+                    <div class="alert-item">
+                        <div class="alert-indicator bg-blue"></div>
+                        <div class="alert-body">
+                            <span class="alert-desc"><strong>SLA breach</strong> in Onboarding (&gt; 5 days)</span>
+                            <span class="alert-time">2 hrs ago</span>
+                        </div>
+                    </div>
+                    <div class="alert-item">
+                        <div class="alert-indicator bg-success"></div>
+                        <div class="alert-body">
+                            <span class="alert-desc">Engagement survey launched successfully</span>
+                            <span class="alert-time">3 hrs ago</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </aside>
+    </div>
+
+    <!-- AI Chatbot Modal/Floating Window -->
+    <div id="ai-chat-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="modal-header-title">
+                    <i data-lucide="sparkles"></i>
+                    <span>icogz AI Assistant</span>
+                </div>
+                <button class="modal-close" onclick="closeChatModal()">&times;</button>
+            </div>
+            <div class="modal-body" id="modal-chat-messages">
+                <!-- Chat messages go here -->
+            </div>
+            <div class="modal-footer">
+                <input type="text" placeholder="Type your follow-up query..." id="modal-chat-input" onkeyup="checkModalChatSubmit(event)">
+                <button class="btn btn-primary" onclick="submitModalChat()"><i data-lucide="send"></i></button>
+            </div>
+        </div>
+    </div>
+
+    <!-- JS File -->
+    <script src="app.js?v=1.0.7"></script>
+</body>
+</html>

@@ -1,0 +1,208 @@
+/* settings.css - Styling for Settings page */
+/* Design System Variables */
+:root {
+  --font-family: 'Inter', sans-serif;
+  --primary-color: hsl(210, 70%, 50%);
+  --background-color: hsl(0, 0%, 98%);
+  --card-bg: hsl(0, 0%, 100%);
+  --text-color: hsl(210, 10%, 15%);
+  --border-radius: 0.75rem;
+  --shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background-color: hsl(210, 10%, 12%);
+    --card-bg: hsl(210, 10%, 18%);
+    --text-color: hsl(0, 0%, 90%);
+    --primary-color: hsl(210, 70%, 60%);
+  }
+}
+
+body {
+  font-family: var(--font-family);
+  background: var(--background-color);
+  color: var(--text-color);
+  margin: 0;
+  padding: 0;
+}
+
+.settings-page {
+  max-width: 960px;
+  margin: 2rem auto;
+  padding: 1.5rem;
+  background: var(--card-bg);
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow);
+}
+
+.page-title {
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+  text-align: center;
+  color: var(--primary-color);
+}
+
+.tabs {
+  display: flex;
+  flex-direction: column;
+}
+
+.tab-header {
+  display: flex;
+  border-bottom: 2px solid hsl(210, 10%, 85%);
+  margin-bottom: 1rem;
+  overflow-x: auto;
+}
+
+.tab-item {
+  list-style: none;
+  padding: 0.75rem 1.25rem;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 500;
+  color: var(--text-color);
+}
+
+.tab-item:hover {
+  background: rgba(0, 0, 0, 0.05);
+}
+
+.tab-item.active {
+  border-bottom: 3px solid var(--primary-color);
+  color: var(--primary-color);
+  font-weight: 600;
+}
+
+.tab-content {
+  padding: 1rem;
+}
+
+.tab-panel {
+  display: none;
+}
+
+.tab-panel.active {
+  display: block;
+}
+
+.settings-form {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 0.75rem 1rem;
+  align-items: center;
+  margin-top: 1rem;
+}
+
+.settings-form label {
+  font-weight: 600;
+}
+
+.settings-form input,
+.settings-form select {
+  padding: 0.5rem 0.75rem;
+  border: 1px solid hsl(210, 10%, 80%);
+  border-radius: var(--border-radius);
+  background: var(--card-bg);
+  color: var(--text-color);
+}
+
+.settings-form input:focus,
+.settings-form select:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 2px rgba(33, 150, 243, 0.2);
+}
+
+.settings-form button {
+  grid-column: span 2;
+  justify-self: start;
+  padding: 0.6rem 1.2rem;
+  background: var(--primary-color);
+  color: #fff;
+  border: none;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.settings-form button:hover {
+  background: hsl(210, 70%, 45%);
+}
+
+.integration-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.integration-list li {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 0.75rem;
+}
+
+.integration-list button {
+  margin-left: auto;
+  background: transparent;
+  border: 1px solid var(--primary-color);
+  color: var(--primary-color);
+  border-radius: var(--border-radius);
+  padding: 0.35rem 0.75rem;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+
+.integration-list button:hover {
+  background: var(--primary-color);
+  color: #fff;
+}
+
+/* Utility Buttons */
+.btn-outline {
+  background: transparent;
+  border: 1px solid var(--primary-color);
+  color: var(--primary-color);
+  border-radius: var(--border-radius);
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+  margin-right: 0.5rem;
+}
+
+.btn-outline:hover {
+  background: var(--primary-color);
+  color: #fff;
+}
+
+.btn-primary {
+  background: var(--primary-color);
+  border: none;
+  color: #fff;
+  border-radius: var(--border-radius);
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.btn-primary:hover {
+  background: hsl(210, 70%, 45%);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .settings-form {
+    grid-template-columns: 1fr;
+  }
+  .settings-form button {
+    grid-column: auto;
+    width: 100%;
+  }
+  .tab-header {
+    flex-wrap: wrap;
+  }
+}

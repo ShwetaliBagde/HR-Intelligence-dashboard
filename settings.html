@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Settings | HR Intelligence</title>
+    <meta name="description" content="Configure your profile, workspace, integrations, Aryabot AI settings, and security preferences in the HR Intelligence dashboard." />
+    <link rel="stylesheet" href="styles.css?v=1.0.7" />
+    <link rel="stylesheet" href="settings.css?v=1.0.0" />
+    <script src="https://cdn.jsdelivr.net/npm/lucide@0.344.0/dist/umd/lucide.min.js"></script>
+</head>
+<body>
+    <div class="app-container">
+        <!-- LEFT SIDEBAR (reuse from index) -->
+        <aside class="sidebar">
+            <div class="sidebar-brand">
+                <div class="brand-logo"><img src="logo.png?v=1.0.7" alt="icogz" class="logo-img" /></div>
+                <button class="btn-sidebar-toggle" id="sidebar-toggle-btn"><i data-lucide="chevron-left"></i></button>
+            </div>
+            <nav class="sidebar-nav">
+                <ul class="nav-list">
+                    <!-- existing navigation items... -->
+                    <li class="nav-item"><a href="index.html" class="nav-link"><i data-lucide="layout-dashboard"></i><span>Overview</span></a></li>
+                    <!-- other items omitted for brevity -->
+                    <li class="nav-item"><a href="settings.html" class="nav-link"><i data-lucide="settings"></i><span>Settings</span></a></li>
+                </ul>
+            </nav>
+            <div class="sidebar-footer">
+                <div class="footer-badge"><i data-lucide="cpu"></i><div class="badge-texts"><span class="footer-title">Autonomous Intelligence</span><span class="footer-subtitle">Architecture™</span></div></div>
+            </div>
+        </aside>
+        
+        <!-- MAIN LAYOUT -->
+        <main class="main-layout">
+            <header class="topbar">
+                <div class="topbar-search"><i data-lucide="search" class="search-icon"></i><input type="text" placeholder="Ask anything about your workforce..." id="global-search-input" /></div>
+                <!-- topbar actions omitted for brevity -->
+            </header>
+            <div class="content-container">
+                <section class="settings-page">
+                    <h1 class="page-title">Settings</h1>
+                    <div class="tabs">
+                        <ul class="tab-header">
+                            <li class="tab-item active" data-tab="profile"><i data-lucide="user"></i>Profile</li>
+                            <li class="tab-item" data-tab="workspace"><i data-lucide="layout"></i>Workspace</li>
+                            <li class="tab-item" data-tab="integrations"><i data-lucide="puzzle"></i>Integrations</li>
+                            <li class="tab-item" data-tab="aryabot"><i data-lucide="bot"></i>Aryabot AI</li>
+                            <li class="tab-item" data-tab="security"><i data-lucide="shield"></i>Security</li>
+                        </ul>
+                        <div class="tab-content">
+                            <div class="tab-panel active" id="profile">
+                                <h2>Profile Settings</h2>
+                                <p>Update your personal information, avatar, and notification preferences.</p>
+                                <!-- Placeholder form -->
+                                <form class="settings-form">
+                                    <label>Name</label><input type="text" placeholder="Your name" />
+                                    <label>Email</label><input type="email" placeholder="you@example.com" />
+                                    <label>Timezone</label><select><option>UTC</option><option>GMT+5:30</option></select>
+                                    <button type="submit" class="btn-primary">Save Changes</button>
+                                </form>
+                            </div>
+                            <div class="tab-panel" id="workspace">
+                                <h2>Workspace Settings</h2>
+                                <p>Configure default view, data refresh intervals, and theme.</p>
+                                <form class="settings-form">
+                                    <label>Default Screen</label><select><option>Overview</option><option>Workforce Planning</option></select>
+                                    <label>Data Refresh</label><select><option>5 min</option><option>15 min</option></select>
+                                    <label>Theme</label><select><option>Light</option><option>Dark</option></select>
+                                    <button type="submit" class="btn-primary">Apply</button>
+                                </form>
+                            </div>
+                            <div class="tab-panel" id="integrations">
+                                <h2>Integrations</h2>
+                                <p>Connect third‑party tools such as Slack, Microsoft Teams, and Google Calendar.</p>
+                                <ul class="integration-list">
+                                    <li><i data-lucide="slack"></i>Slack <button class="btn-outline">Connect</button></li>
+                                    <li><i data-lucide="calendar"></i>Microsoft Teams <button class="btn-outline">Connect</button></li>
+                                    <li><i data-lucide="calendar"></i>Google Calendar <button class="btn-outline">Connect</button></li>
+                                </ul>
+                            </div>
+                            <div class="tab-panel" id="aryabot">
+                                <h2>Aryabot AI Settings</h2>
+                                <p>Adjust AI assistant behavior, language model, and response style.</p>
+                                <form class="settings-form">
+                                    <label>Model</label><select><option>GPT‑4</option><option>Claude‑Sonnet</option><option>Anthropic‑Haiku</option></select>
+                                    <label>Response Tone</label><select><option>Professional</option><option>Casual</option></select>
+                                    <button type="submit" class="btn-primary">Update</button>
+                                </form>
+                            </div>
+                            <div class="tab-panel" id="security">
+                                <h2>Security</h2>
+                                <p>Manage passwords, two‑factor authentication, and session logs.</p>
+                                <button class="btn-outline">Change Password</button>
+                                <button class="btn-outline">Enable 2FA</button>
+                                <button class="btn-outline">View Session Activity</button>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </main>
+    </div>
+    <script>
+        // Initialize Lucide icons
+        lucide.createIcons();
+        // Tab switching logic
+        const tabItems = document.querySelectorAll('.tab-item');
+        const panels = document.querySelectorAll('.tab-panel');
+        tabItems.forEach(item => {
+            item.addEventListener('click', () => {
+                // Remove active classes
+                tabItems.forEach(i => i.classList.remove('active'));
+                panels.forEach(p => p.classList.remove('active'));
+                // Activate selected
+                item.classList.add('active');
+                const target = document.getElementById(item.dataset.tab);
+                if (target) target.classList.add('active');
+            });
+        });
+    </script>
+</body>
+</html>
