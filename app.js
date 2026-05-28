@@ -596,7 +596,7 @@ function simulateProjectStaffing() {
 // ==========================================================================
 // OTHER INTERACTIVE FEATURES (MODALS, DYNAMIC SIMULATORS)
 // ==========================================================================
-    // Existing initActionButtons code
+function initActionButtons() {
     const takeAction = document.getElementById('take-action-btn');
     if (takeAction) {
         takeAction.addEventListener('click', () => {
@@ -604,25 +604,10 @@ function simulateProjectStaffing() {
         });
     }
 
-    // Updated toggle for AI Projects panel
-const toggleProjectsAI = document.getElementById('toggle-ai-projects');
-if (toggleProjectsAI) {
-    toggleProjectsAI.addEventListener('click', () => {
-        toggleAIProjectPanel();
-    });
-}
-
-    const searchAskPill = document.getElementById('search-ask-pill');
-    if (searchAskPill) {
-        searchAskPill.addEventListener('click', () => {
-            openChatModal();
-            addAIMessage("Hello Anita Sharma! How can I assist you with your workforce intelligence queries today?");
-        });
-    }
-    const takeAction = document.getElementById('take-action-btn');
-    if (takeAction) {
-        takeAction.addEventListener('click', () => {
-            alert("📋 Action Plan Created:\n1. 1-on-1 scheduled with West Region Sales Directors.\n2. stay interviews automated in Workday for Flight-Risk groups.\n3. Talent Acquisition priority list updated.");
+    const toggleProjectsAI = document.getElementById('toggle-ai-projects');
+    if (toggleProjectsAI) {
+        toggleProjectsAI.addEventListener('click', () => {
+            toggleAIProjectPanel();
         });
     }
 
@@ -650,10 +635,6 @@ if (toggleProjectsAI) {
     const toggleBtn = document.getElementById('sidebar-toggle-btn');
     if (toggleBtn) {
         toggleBtn.addEventListener('click', toggleSidebar);
-    }
-    const rightPanelToggleBtn = document.getElementById('right-panel-toggle-btn');
-    if (rightPanelToggleBtn) {
-        rightPanelToggleBtn.addEventListener('click', toggleRightPanel);
     }
 }
 
